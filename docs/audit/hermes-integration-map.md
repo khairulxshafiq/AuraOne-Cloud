@@ -151,3 +151,4 @@ The fallback in `route.ts` handles 4 keyword patterns in BM:
 ---
 
 *End of Hermes Integration Map — Phase 0A*
+
