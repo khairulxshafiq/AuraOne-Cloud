@@ -69,9 +69,11 @@ export async function POST(req: NextRequest) {
 
           if (lowerMsg.includes("salam") || lowerMsg.includes("hi") || lowerMsg.includes("halo") || lowerMsg.includes("hello")) {
             reply = `Ada apa-apa yang boleh saya bantu anda uruskan hari ini? Anda boleh tanya saya tentang:\n\n` +
-              `- 📊 **Analisis Pasaran & Saham** (Amira Trading Engine)\n` +
-              `- ✍️ **Kandungan & Copywriting Sakluma** (Xiao Persona)\n` +
-              `- 🎨 **Penjanaan Imej AI** (Kumar FLUX LoRA v9)\n` +
+              `- 📊 **Analisis Pasaran & Saham** (Aura-Trade Trading Engine)\n` +
+              `- ✍️ **Kandungan & Penulisan Sakluma** (Aura-Pen Content Engine)\n` +
+              `- 🎨 **Penjanaan Imej AI** (Aura-Art FLUX LoRA)\n` +
+              `- 📡 **Radar Trend & Scrape Media** (Aura-Scout Intelligence)\n` +
+              `- 🎬 **Video & Media Motion** (Aura-Vision Pipeline)\n` +
               `- ⚙️ **Konfigurasi Agen & Integrasi Workflow**\n\n` +
               `Sila beritahu saya apa objektif anda!`;
           } else if (lowerMsg.includes("kredit") || lowerMsg.includes("credit") || lowerMsg.includes("payg") || lowerMsg.includes("harga")) {
@@ -81,7 +83,7 @@ export async function POST(req: NextRequest) {
               `- Tambah nilai (topup) boleh dilakukan dengan pantas melalui integrasi FPX tempatan (Fasa 0b).`;
           } else if (lowerMsg.includes("sakluma") || lowerMsg.includes("daging") || lowerMsg.includes("salai")) {
             reply = `Jenama **Sakluma** (Daging Salai Tempurung Kelapa) adalah salah satu tunjang operasi komersial AuraOne.\n\n` +
-              `Persona **Xiao** bertanggungjawab menghasilkan draf konten beremosi dan promosi di Facebook/TikTok, manakala **Kumar** menjana visual produk yang memukau.`;
+              `Ejen **Aura-Pen** bertanggungjawab menghasilkan draf konten beremosi dan promosi di Facebook/TikTok, manakala **Aura-Art** menjana visual produk yang memukau.`;
           } else {
             reply = `Mesej anda: "*${message}*"\n\n` +
               `Saya telah merekodkan konteks perbualan ini ke dalam sesi kerja (*workspace sandbox*) anda di AuraOne Cloud.\n\n` +

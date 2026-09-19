@@ -18,6 +18,8 @@ import {
   MessageSquare,
   Menu,
   X,
+  Radio,
+  Video,
 } from "lucide-react";
 
 interface Message {
@@ -43,28 +45,44 @@ const AGENTS = [
     color: "from-purple-500 to-indigo-600",
   },
   {
-    id: "Amira",
-    name: "Amira",
+    id: "Aura-Trade",
+    name: "Aura-Trade",
     role: "Market Analyst",
     desc: "Penganalisis sentimen Bursa Malaysia & pasaran kripto.",
     icon: TrendingUp,
     color: "from-emerald-500 to-teal-600",
   },
   {
-    id: "Xiao",
-    name: "Xiao",
+    id: "Aura-Pen",
+    name: "Aura-Pen",
     role: "Content Director",
-    desc: "Pakar copywriting berimpak tinggi & naratif jenama Sakluma.",
+    desc: "Pakar penulisan draf konten berimpak tinggi & naratif jenama Sakluma.",
     icon: Feather,
     color: "from-amber-500 to-orange-600",
   },
   {
-    id: "Kumar",
-    name: "Kumar",
+    id: "Aura-Art",
+    name: "Aura-Art",
     role: "Visual Architect",
     desc: "Penjana konsep visual & persona digital maya konsisten.",
     icon: Palette,
     color: "from-pink-500 to-rose-600",
+  },
+  {
+    id: "Aura-Scout",
+    name: "Aura-Scout",
+    role: "Radar & Intelligence",
+    desc: "Pengimbas berita, media sosial (YouTube/TikTok/X) & radar tren.",
+    icon: Radio,
+    color: "from-cyan-500 to-blue-600",
+  },
+  {
+    id: "Aura-Vision",
+    name: "Aura-Vision",
+    role: "Video & Media Director",
+    desc: "Pengarah video Reels, motion graphics & pipeline visual AI.",
+    icon: Video,
+    color: "from-violet-500 to-fuchsia-600",
   },
 ];
 
@@ -510,7 +528,7 @@ export default function CloudCockpit() {
                 >
                   📈 <span className="font-semibold text-white">Analisis Pasaran</span>
                   <p className="text-[11px] text-zinc-500 mt-1">
-                    Semak sentimen Bursa & teknikal pasaran bersama Amira.
+                    Semak sentimen Bursa & teknikal pasaran bersama Aura-Trade.
                   </p>
                 </button>
 
@@ -522,7 +540,7 @@ export default function CloudCockpit() {
                 >
                   ✍️ <span className="font-semibold text-white">Copywriting Sakluma</span>
                   <p className="text-[11px] text-zinc-500 mt-1">
-                    Jana draf iklan menarik gaya tempatan bersama Xiao.
+                    Jana draf iklan menarik gaya tempatan bersama Aura-Pen.
                   </p>
                 </button>
 
@@ -546,7 +564,7 @@ export default function CloudCockpit() {
                 >
                   🎨 <span className="font-semibold text-white">Konsep Visual FLUX</span>
                   <p className="text-[11px] text-zinc-500 mt-1">
-                    Rangka prompt kreatif untuk watak konsisten AI bersama Kumar.
+                    Rangka prompt kreatif untuk watak konsisten AI bersama Aura-Art.
                   </p>
                 </button>
               </div>
