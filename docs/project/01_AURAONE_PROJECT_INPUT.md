@@ -1,1074 +1,1430 @@
-# 01 — AuraOne Project Input
+# AuraOne Product Brief
 
-# AuraOne Cloud Project Input
+Status: Founder Draft  
+Owner: Khairul  
+Last reviewed: 2026-09-20
 
-Status: Founder Input Required  
-Owner: [ISI]  
-Last reviewed: [ISI]
-
-> Dokumen ini mengandungi fakta operasi dan keputusan founder.
-> Jangan letakkan production secret dalam fail ini.
+> This document contains product direction, operational facts, and founder decisions.
+> Review every item marked `[CHECK]` before public release.
+>
+> Do not store passwords, API keys, session cookies, private IP addresses, access tokens, or production secrets in this document.
 
 ---
 
-# 1. Identiti Produk
+# 1. Product Identity
 
-## Nama rasmi produk
-
-AuraOne Cloud
-
-## Nama pendek
-
+## Official product name
 AuraOne
 
-## Tagline utama
+## Product company
+Norliv Labs
 
-[ISI]
+## Brand presentation
+`AuraOne by Norliv Labs`
 
-Cadangan awal:
+## Primary headline
+`One Place for Everything AI.`
 
-`AuraOne, AI Assistant Anda 24/7`
+## Primary subheadline
+`From conversations to content, analysis, automation, and everyday tasks.`
 
-## Pernyataan satu ayat
+## Supporting line
+`Your personal AI assistant that remembers your context and helps you get things done.`
 
-[ISI]
+## Malaysian hook
+`Seorang pekerja. Seorang founder. Satu AI yang sentiasa membantu.`
 
-Contoh:
+## Brand signature
+`Built in Malaysia. Ready for the world.`
 
-`Platform AI berbahasa Melayu untuk chat, analisis, penciptaan kandungan dan pembinaan bot peribadi.`
+## One-sentence product statement
+`An AI workspace for conversations, content creation, analysis, automation, and personal AI assistants.`
 
-## Visi produk
+## Product vision
+To give every individual and business a personal AI assistant that understands their context, communicates naturally, and helps them get things done.
 
-[ISI]
+## Malaysian-first vision
+Setiap individu dan SME patut mempunyai PA AI sendiri yang memahami konteks, bahasa, dan cara mereka bekerja.
 
-## Misi produk
+## Product mission
+Build an accessible AI assistant that can communicate, remember context, create content, analyse information, and automate everyday work without requiring technical setup.
 
-[ISI]
+## Core problem
+Many AI tools are:
 
-## Masalah utama yang diselesaikan
+1. Designed primarily around Western or English-only workflows
+2. Expensive for occasional users
+3. Difficult to personalise without technical knowledge
+4. Fragmented across multiple products
+5. Unfamiliar with Malaysian language and business context
 
-[ISI]
+## AuraOne value proposition
 
-## Nilai unik AuraOne
+1. One AI workspace for conversations, content, analysis, and automation
+2. English-first interface with strong Bahasa Melayu support
+3. Malaysian context built into the product experience
+4. Ready-to-use AI assistants with minimal setup
+5. Flexible credits and accessible pricing
+6. Personal memory with user control
+7. Custom AI assistants that can eventually be shared with others
+8. Powered by the Hermes orchestration engine
 
-[ISI]
+## Positioning principles
+
+- International product, Malaysian roots
+- English-first product interface
+- Bahasa Melayu as a first-class language
+- Simple enough for non-technical users
+- Useful before it becomes impressive
+- Personal assistance before feature complexity
+- Trust and user control before aggressive automation
+
+## Positioning to avoid
+
+- “ChatGPT clone”
+- “ChatGPT Malaysia”
+- “The most powerful AI”
+- “All-in-one AI solution”
+- “Revolutionary AI ecosystem”
+- Claims that cannot be independently verified
 
 ---
 
-# 2. Pengguna Sasaran
+# 2. Target Users
 
-## Pasaran utama
+## Primary market
 
-Pilih semua yang berkaitan:
+- [x] Business owners
+- [x] SMEs
+- [x] Professionals
+- [x] Creators
+- [x] Independent operators
+- [ ] Traders as primary audience
+- [ ] Students
+- [ ] General consumers, Phase 2
+- [ ] Organisations, Phase 3
+- [ ] Other: [CHECK]
 
-- [ ] Pemilik bisnes
-- [ ] SME
-- [ ] Trader
-- [ ] Pelajar
-- [ ] Creator
-- [ ] Profesional
-- [ ] Pengguna umum
-- [ ] Organisasi
-- [ ] Lain-lain: [ISI]
+## Primary persona
 
-## Persona utama
+Name: Pak Mat  
+Profile: SME owner, aged 30 to 45  
+Business types: Food, tailoring, retail, services, or home-based business  
+Technology level: Low to moderate  
+Preferred language: Bahasa Melayu  
+Typical tools: WhatsApp, Facebook, TikTok, basic office applications
 
-Nama persona:
-[ISI]
+### Problems
 
-Pekerjaan:
-[ISI]
+- Limited time and staff
+- Needs help replying to customers
+- Struggles to produce regular content
+- Repetitive administrative work
+- Existing AI products feel complicated or too English-heavy
+- Wants predictable and affordable costs
 
-Masalah utama:
-[ISI]
+### Goals
 
-Matlamat:
-[ISI]
+- Automate parts of marketing and administration
+- Produce usable content quickly
+- Communicate naturally in Bahasa Melayu
+- Start with minimal setup
+- Keep monthly AI expenditure affordable
 
-Tahap kemahiran teknologi:
-[ISI]
+## Secondary persona
 
-Bahasa pilihan:
-[ISI]
+Name: Amir  
+Age: 28  
+Profile: Professional, part-time creator, and active market researcher  
+Technology level: Moderate  
+Preferred languages: English and Bahasa Melayu
 
-## Persona sekunder
+### Goals
 
-[ISI]
+- Research information quickly
+- Analyse documents and market information
+- Create bilingual content
+- Build personal AI workflows
+- Use specialised assistants when required
 
-## Negara sasaran
+## Initial target countries
 
-- [ ] Malaysia
-- [ ] Singapura
-- [ ] Indonesia
-- [ ] Brunei
-- [ ] Global
-- [ ] Lain-lain: [ISI]
+- [x] Malaysia, primary launch market
+- [ ] Singapore, future
+- [ ] Brunei, future
+- [ ] Indonesia, future localisation
+- [ ] Wider international market
+- [ ] Other: [CHECK]
 
-## Bahasa yang disokong
+## Supported languages
 
-- [x] Bahasa Melayu
 - [x] English
-- [ ] Bahasa Indonesia
-- [ ] Lain-lain: [ISI]
+- [x] Bahasa Melayu
+- [ ] Bahasa Indonesia, future
+- [ ] Chinese languages, future research
+- [ ] Other: [CHECK]
 
-## Bahasa lalai
+## Default product language
+English
 
-Bahasa Melayu
-
----
-
-# 3. Pemilik dan Hubungan
-
-## Pemilik produk
-
-Nama:
-[ISI]
-
-Jawatan:
-[ISI]
-
-Email:
-[ISI]
-
-Telefon:
-[ISI]
-
-Telegram:
-[ISI]
-
-GitHub:
-[ISI]
-
-## Hubungan sokongan
-
-Support email:
-[ISI]
-
-Billing email:
-[ISI]
-
-Security email:
-[ISI]
-
-Privacy email:
-[ISI]
-
-Nombor sokongan:
-[ISI]
-
-Waktu sokongan:
-[ISI]
-
-Time zone:
-[ISI]
-
-## Alamat perniagaan
-
-Nama entiti:
-[ISI]
-
-Nombor pendaftaran:
-[ISI]
-
-Alamat baris 1:
-[ISI]
-
-Alamat baris 2:
-[ISI]
-
-Poskod:
-[ISI]
-
-Bandar:
-[ISI]
-
-Negeri:
-[ISI]
-
-Negara:
-[ISI]
-
-> Tentukan sama ada alamat penuh perlu dipaparkan pada landing page,
-> invois, Terms atau halaman Contact.
+## Localisation principle
+English is the default product interface. Bahasa Melayu must remain a complete, natural, and first-class experience rather than a direct or awkward translation.
 
 ---
 
-# 4. Domain dan URL
+# 3. Brand Architecture
 
-Production domain:
-[ISI]
+## Company
+Norliv Labs
 
-Application URL:
-[ISI]
+## Product
+AuraOne
 
-Admin URL:
-[ISI]
+## Brand lock-up
+`AuraOne by Norliv Labs`
 
-Staging URL:
-[ISI]
+## AI assistants
+Working assistant names:
 
-Preview URL:
-[ISI]
+- Aura
+- Xiao
+- Kumar
+- Amira
+- Akira
 
-Status page:
-[ISI]
+## Naming principle
+AuraOne is the platform. Individual assistants are experiences or specialised capabilities within AuraOne.
 
-Documentation URL:
-[ISI]
+## Recommended user language
 
-Privacy Policy URL:
-[ISI]
+Preferred:
 
-Terms of Service URL:
-[ISI]
+- “Ask AuraOne.”
+- “Create it in AuraOne.”
+- “My AuraOne assistant remembers this.”
+- “Build an assistant in AuraOne.”
 
-Refund Policy URL:
-[ISI]
+Avoid:
 
-Contact URL:
-[ISI]
+- “Log in to AuraOne Cloud.”
+- “Deploy an AuraOne agent instance.”
+- “Configure your AI orchestration environment.”
 
 ---
 
-# 5. Header dan Navigasi Landing
+# 4. Ownership and Contacts
+
+## Product owner
+
+Name: Mohammad Khairul Shafiq  
+Role: Founder  
+Public email: [CHECK]  
+Founder email: [PRIVATE, DO NOT PUBLISH]  
+Public telephone: [CHECK]  
+Telegram: [CHECK]  
+GitHub: `khairulxshafiq` [CHECK]
+
+## Support contacts
+
+Support email: `support@auraone.my` [CHECK]  
+Billing email: `billing@auraone.my` [CHECK]  
+Security email: `security@auraone.my` [CHECK]  
+Privacy email: `privacy@auraone.my` [CHECK]  
+Support telephone: [CHECK]  
+Support hours: `9:00 AM to 6:00 PM MYT, Monday to Friday` [CHECK]  
+Time zone: `Asia/Kuala_Lumpur, UTC+8`
+
+## Business entity
+
+Trading name: Norliv Labs [CHECK]  
+Legal entity: [FOUNDER TO COMPLETE]  
+Registration number: [FOUNDER TO COMPLETE]  
+Registered address: [FOUNDER TO COMPLETE]  
+Country: Malaysia
+
+## Address publication decision
+[CHECK]
+
+Only publish an address when legally necessary and after deciding whether a registered office or business correspondence address should be used.
+
+---
+
+# 5. Domains and URLs
+
+Production domain: `auraone.my` [VERIFY OWNERSHIP]  
+Marketing site: `https://auraone.my` [CHECK]  
+Application: `https://app.auraone.my` [PROPOSED]  
+Admin: Private access only  
+Staging: [PRIVATE]  
+Preview: [PRIVATE]  
+Status page: `https://status.auraone.my` [PLANNED]  
+Documentation: `https://docs.auraone.my` [PLANNED]  
+Privacy Policy: `https://auraone.my/privacy` [PLANNED]  
+Terms of Service: `https://auraone.my/terms` [PLANNED]  
+Refund Policy: `https://auraone.my/refunds` [PLANNED]  
+Contact: `https://auraone.my/contact` [PLANNED]
+
+## Domain rules
+
+- Do not publish private admin URLs
+- Do not publish Tailscale addresses
+- Do not publish origin-server IP addresses
+- Restrict admin access through private networking and MFA
+- Use separate production, staging, and development environments
+
+---
+
+# 6. Homepage
 
 ## Logo text
-
-[ISI]
-
-Cadangan:
 `AuraOne`
 
-## Navigation desktop
+## Brand attribution
+`by Norliv Labs`
 
-Pilih dan susun:
+## Eyebrow copy
+Option A:
+`Built in Malaysia. Ready for the world.`
 
-- [ ] Utama
-- [ ] Ciri
-- [ ] Demo
-- [ ] Harga
-- [ ] Bots
-- [ ] Tentang
-- [ ] Hubungi
-- [ ] Log masuk
-- [ ] Cuba Percuma
+Option B:
+`Your personal AI workspace.`
 
-Susunan dipilih:
-[ISI]
+## Hero headline
+`One Place for Everything AI.`
 
-## CTA utama
+## Hero subheadline
+`From conversations to content, analysis, automation, and everyday tasks.`
 
-[ISI]
+## Supporting description
+`AuraOne is a personal AI workspace that remembers your context and helps you communicate, create, research, and get work done.`
 
-Cadangan:
-`Mula Berchat`
+## Primary CTA
+`Start with AuraOne`
 
-## CTA kedua
+## Alternative primary CTA
+`Start Chatting`
 
-[ISI]
+## Secondary CTA
+`Try the Demo`
 
-Cadangan:
-`Cuba Demo`
+## Malaysian supporting hook
+`Seorang pekerja. Seorang founder. Satu AI yang sentiasa membantu.`
+
+## Navigation
+
+Home › Features › Assistants › Use Cases › Pricing › About › Sign In › Start Free
 
 ## Announcement bar
 
-Perlu:
-- [ ] Ya
-- [ ] Tidak
+Recommended launch copy:
 
-Copy:
-[ISI]
+`AuraOne early access is opening soon. Join the waitlist.`
+
+Alternative with pricing:
+
+`Early access is coming soon. Start free and top up only when you need more.`
+
+Avoid publishing an exact top-up price until billing costs, token economics, and payment-provider fees have been validated.
 
 ---
 
-# 6. Footer
+# 7. Homepage Message Hierarchy
+
+## Level 1: Brand promise
+`One Place for Everything AI.`
+
+## Level 2: Product explanation
+`From conversations to content, analysis, automation, and everyday tasks.`
+
+## Level 3: Personal benefit
+`An AI assistant that remembers your context and works the way you do.`
+
+## Level 4: Malaysian identity
+`Built in Malaysia. Ready for the world.`
+
+## Level 5: Local campaign hook
+`Seorang pekerja. Seorang founder. Satu AI yang sentiasa membantu.`
+
+## Copy principle
+Do not force the word “one” into every sentence. Use it mainly in the headline and selected campaign messages so that it remains distinctive.
+
+---
+
+# 8. Suggested Homepage Sections
+
+## Section 1: Hero
+
+**AuraOne**
+
+# One Place for Everything AI.
+
+From conversations to content, analysis, automation, and everyday tasks.
+
+AuraOne is a personal AI workspace that remembers your context and helps you get things done.
+
+`[Start with AuraOne]` `[Try the Demo]`
+
+Built in Malaysia. Ready for the world.
+
+## Section 2: Core promise
+
+# One assistant, built around you.
+
+AuraOne can understand your goals, remember approved context, and support your everyday work without requiring complicated technical setup.
+
+## Section 3: Key capabilities
+
+### Ask and explore
+Have natural conversations, research topics, and turn complex information into clear answers.
+
+### Create
+Draft content, messages, plans, ideas, and visual assets from one workspace.
+
+### Analyse
+Review information, files, and data with an assistant that maintains the relevant context.
+
+### Automate
+Schedule recurring tasks and connect supported tools as AuraOne’s automation capabilities expand.
+
+## Section 4: Malaysian-first experience
+
+# Global by design. Malaysian at heart.
+
+Use AuraOne in English or Bahasa Melayu, with an experience designed around how Malaysians communicate and work.
+
+`Seorang pekerja. Seorang founder. Satu AI yang sentiasa membantu.`
+
+## Section 5: Personal memory
+
+# An AI that remembers what matters.
+
+AuraOne can remember approved preferences, goals, and working context, while giving users control over what is saved and deleted.
+
+## Section 6: Assistants
+
+# Start with an assistant that is ready to help.
+
+Choose a ready-made assistant for content, research, business support, personal productivity, or other supported tasks.
+
+No prompt engineering required.
+
+## Section 7: Pricing
+
+# Start free. Pay for more when you need it.
+
+Begin with free credits, then choose a monthly plan or purchase additional usage according to your needs.
+
+## Section 8: Final CTA
+
+# Make everyday work feel lighter.
+
+Start with one assistant for your conversations, ideas, content, analysis, and everyday tasks.
+
+`[Start Free]`
+
+---
+
+# 9. Footer
 
 ## Footer statement
+`AuraOne is your personal AI workspace for conversations, content, analysis, automation, and everyday tasks.`
 
-[ISI]
+## Brand signature
+`Built in Malaysia by Norliv Labs.`
 
-## Footer sections
+## Footer categories
 
-- [ ] Produk
-- [ ] Harga
-- [ ] Syarikat
-- [ ] Sokongan
-- [ ] Legal
-- [ ] Social
-- [ ] Status
+### Product
+- Features
+- Assistants
+- Pricing
+- Demo
+- Updates
 
-## Social links
+### Company
+- About
+- Contact
+- Careers, future
+- Press, future
 
-Facebook:
-[ISI]
+### Support
+- Help Centre
+- Documentation
+- Contact Support
+- System Status, future
 
-Instagram:
-[ISI]
+### Legal
+- Privacy Policy
+- Terms of Service
+- Refund Policy
+- Cookie Policy
+- AI Disclaimer
+- Financial Information Disclaimer
 
-TikTok:
-[ISI]
-
-YouTube:
-[ISI]
-
-LinkedIn:
-[ISI]
-
-X:
-[ISI]
-
-Telegram:
-[ISI]
+### Social
+- Facebook: [CHECK]
+- Instagram: [CHECK]
+- TikTok: [CHECK]
+- YouTube: [CHECK]
+- LinkedIn: [CHECK]
+- X: [CHECK]
+- Telegram: [CHECK]
 
 ## Copyright
+`© 2026 Norliv Labs. AuraOne and associated marks are owned by Norliv Labs. All rights reserved.`
 
-[ISI]
-
-Contoh:
-`© 2026 AuraOne. Hak cipta terpelihara.`
+[CHECK LEGAL ENTITY AND TRADEMARK WORDING]
 
 ---
 
-# 7. Branding
+# 10. Visual Brand
 
 ## Logo
 
-Primary logo path:
-[ISI]
+Primary logo: [CHECK]  
+Product icon: [TO CREATE]  
+Favicon: `/favicon.ico`  
+Monochrome logo: [TO CREATE]
 
-Icon path:
-[ISI]
+## Logo rule
+Maintain clear space equal to at least the height of the “O” in the AuraOne wordmark.
 
-Favicon path:
-[ISI]
+## Working colours
 
-Monochrome logo:
-[ISI]
-
-Logo clear-space rule:
-[ISI]
-
-## Warna pilihan founder
-
-Primary:
-[ISI]
-
-Secondary:
-[ISI]
-
-Accent:
-[ISI]
-
-Gold:
-[ISI]
-
-Success:
-[ISI]
-
-Warning:
-[ISI]
-
-Danger:
-[ISI]
+Primary dark: `#170D02` [CHECK]  
+Amber: `#FFAC02` [CHECK]  
+Blue accent: `#3B82F6` [CHECK]  
+Success: `#22C55E`  
+Warning: `#F59E0B`  
+Danger: `#EF4444`
 
 ## Theme
 
-- [ ] Dark sahaja
-- [ ] Light sahaja
-- [ ] Dark dan Light
-- [ ] Ikut system preference
+- [x] Dark for initial private beta
+- [ ] Light theme before wider public launch
+- [ ] System preference after both themes are stable
 
-Pilihan:
-[ISI]
+## Fonts
 
-## Preferred fonts
+Display: [CHECK]  
+Interface: `Inter, system-ui, sans-serif`
 
-Display:
-[ISI]
+## Visual direction
 
-Interface:
-[ISI]
+- Warm intelligence
+- Calm and capable
+- Human rather than robotic
+- Premium but accessible
+- Clear, spacious interfaces
+- Strong typography
+- Limited decorative effects
 
-## Perkara visual yang perlu dielakkan
+## Avoid
 
-[ISI]
-
----
-
-# 8. Produk dan Capability
-
-## Capability Hermes semasa
-
-Senaraikan capability yang benar-benar berfungsi:
-
-- [ ] Chat
-- [ ] Trade
-- [ ] Image
-- [ ] Video
-- [ ] Kewangan
-- [ ] Search
-- [ ] Files
-- [ ] Email
-- [ ] Telegram
-- [ ] Scheduling
-- [ ] Lain-lain: [ISI]
-
-## Endpoint Hermes
-
-Jangan letakkan secret.
-
-Base URL variable:
-[ISI]
-
-Authentication method:
-[ISI]
-
-Streaming protocol:
-[ISI]
-
-Timeout:
-[ISI]
-
-Retry behaviour:
-[ISI]
-
-Known limits:
-[ISI]
-
-## Model atau provider
-
-Chat:
-[ISI]
-
-Trade:
-[ISI]
-
-Image:
-[ISI]
-
-Video:
-[ISI]
-
-Search:
-[ISI]
-
-Fallback:
-[ISI]
+- Neon gamer aesthetic
+- Generic robot imagery
+- Excessive glowing blue graphics
+- Overused space imagery
+- Complicated dashboards on the homepage
+- Unverifiable trust badges
+- “Revolutionary AI” visual clichés
 
 ---
 
-# 9. Pelan Langganan
+# 11. Product Capabilities
+
+## Currently verified capabilities
+
+- [x] Streaming chat
+- [x] Web search
+- [x] File handling
+- [x] Image generation
+- [x] Email integration, internal
+- [x] Telegram integration, internal
+- [x] Scheduling through self-hosted cron
+- [x] News collection
+- [x] Airtable publishing, internal
+- [x] Facebook publishing, partial
+- [x] Blogger workflow, internal
+- [x] Persona-based assistants
+
+## Specialised capabilities
+
+- [x] Market information assistant
+- [x] Personal finance tracking
+- [ ] Video generation, experimental
+- [ ] Public bot builder
+- [ ] Community assistant gallery
+- [ ] Multi-tenant integrations
+
+## Product launch priority
+
+### MVP
+
+1. Authentication
+2. Tenant isolation
+3. Chat
+4. Credits
+5. Controlled memory
+6. Basic search
+7. Usage visibility
+8. Account deletion and export
+
+### After MVP
+
+1. Ready-made assistants
+2. Files
+3. Image generation
+4. Scheduling
+5. Telegram
+6. Additional integrations
+7. Bot builder
+8. Community gallery
+9. Video
+
+## Feature principle
+A capability must not be advertised as publicly available until it is secure, multi-tenant, measurable, supportable, and production-ready.
+
+---
+
+# 12. Hermes Engine
+
+## Internal engine
+Hermes
+
+## External presentation
+Do not make Hermes the primary customer-facing brand. AuraOne is the product users interact with.
+
+## Current architecture
+
+- Backend engine: Hermes
+- Streaming: SSE
+- Internal authentication: Existing web session
+- Production authentication: Planned migration
+- Scheduler: Self-hosted cron
+- Current session database: SQLite
+- Planned user platform: Supabase
+
+## Known limitations
+
+- Existing architecture is not yet production multi-tenant
+- Current gateway architecture requires isolation review
+- Production fallback provider is not configured
+- Retry and timeout behaviour require formal definition
+- Current integrations were designed primarily for internal use
+
+## Required before public beta
+
+- User-level access control
+- Tenant-level data isolation
+- Per-user usage metering
+- Session expiry
+- Rate limits
+- Error handling
+- Retry policy
+- Audit logs
+- Safe tool permissions
+- Integration consent
+- Account deletion
+- Data export
+
+---
+
+# 13. Models and Providers
+
+## Current working configuration
+
+Chat model: Internal working model [DO NOT MARKET UNTIL CONFIRMED]  
+Image model: Current image provider [CHECK COMMERCIAL TERMS]  
+Search: Current web-search backend  
+Video: [EXPERIMENTAL]  
+Fallback: Not currently configured
+
+## Provider requirements
+
+Before public launch, confirm:
+
+- Commercial usage rights
+- Data retention policy
+- Provider processing locations
+- Rate limits
+- Model availability
+- Content-safety obligations
+- Cost per task
+- Outage and fallback behaviour
+- Whether customer content is used for model training
+
+## Public claims rule
+Do not publish specific model names as permanent product promises unless provider contracts and fallback plans support those claims.
+
+---
+
+# 14. Pricing Strategy
+
+> Pricing is a working hypothesis and must be validated against actual provider cost, payment fees, taxes, support cost, and abuse risk.
 
 ## Free
 
-Harga bulanan:
-RM0
+Price: `RM0`
 
-Capability:
-[ISI]
+Includes:
 
-Token quota:
-10,000
+- Core chat
+- Limited search
+- One starter assistant
+- Limited memory
+- Basic usage history
 
-Image allowance:
-[ISI]
-
-Search allowance:
-[ISI]
-
-Bot allowance:
-[ISI]
+Working monthly credits: [CHECK]
 
 ## Pro
 
-Harga bulanan:
-[ISI]
+Working price: `RM19 per month` [CHECK]
 
-Cadangan minimum yang pernah disebut:
-RM19 sebulan
+Includes:
 
-Harga tahunan:
-[ISI]
+- Chat
+- Search
+- Files
+- Image generation
+- Expanded memory
+- Up to three personal assistants
+- Higher usage allowance
 
-Capability:
-
-- [x] Chat
-- [x] Trade
-- [x] Image
-- [ ] Video
-- [ ] Lain-lain: [ISI]
-
-Token quota:
-150,000
-
-Image allowance:
-[ISI]
-
-Search allowance:
-[ISI]
-
-Bot allowance:
-[ISI]
+Annual price: [CHECK]
 
 ## Empire
 
-Harga bulanan:
-[ISI]
+Working price: `RM49 per month` [CHECK]
 
-Harga tahunan:
-[ISI]
+Includes:
 
-Capability:
+- Higher usage allowance
+- Advanced assistants
+- Automation
+- Scheduling
+- Eligible integrations
+- Advanced assistant skills
+- Priority feature access
 
-- [x] Chat
-- [x] Trade
-- [x] Image
-- [x] Video
-- [x] Advanced bot skills
-- [ ] Lain-lain: [ISI]
+Annual price: [CHECK]
 
-Token quota:
-400,000
+## International pricing
+Define international USD pricing only after payment processing, taxes, foreign-exchange handling, and provider margins are validated.
 
-Image allowance:
-[ISI]
+## Billing options
 
-Video allowance:
-[ISI]
+- [x] Monthly
+- [x] Annual
+- [x] Additional usage credits
+- [ ] Enterprise invoicing, future
 
-Search allowance:
-[ISI]
+## Annual discount
+Working proposal: Two months equivalent free [CHECK]
 
-Bot allowance:
-[ISI]
+## Currency
+MYR for Malaysian customers
 
-## Billing toggle
+## Tax handling
+[LEGAL AND ACCOUNTING REVIEW REQUIRED]
 
-- [ ] Monthly
-- [ ] Yearly
+## Naming review
+“Empire” may feel aspirational locally but less clear internationally. Alternatives to test:
 
-Yearly discount:
-[ISI]
+- Pro
+- Plus
+- Max
+- Advanced
+- Business
 
-Currency:
-MYR
+Recommended initial structure:
 
-Tax handling:
-[ISI]
-
----
-
-# 10. Trial
-
-Trial duration:
-72 jam
-
-Trial name:
-Trial Pro
-
-Trial capability:
-
-- [x] Chat
-- [x] Trade
-- [x] Image
-- [ ] Video
-
-Trial token allowance:
-[ISI]
-
-Trial image allowance:
-[ISI]
-
-Trial search allowance:
-[ISI]
-
-Credit card required:
-Tidak
-
-Trial selepas tamat:
-Kembali kepada Free
-
-Upgrade modal frequency:
-[ISI]
+- Free
+- Pro
+- Business
 
 ---
 
-# 11. Top-up
+# 15. Trial
 
-## Package 1
+Trial name: `Pro Trial`  
+Duration: `72 hours` [CHECK]  
+Credit card required: No  
+End behaviour: Return to Free
 
-Nama:
-+50,000 token
+## Trial capabilities
 
-Harga:
-RM5.90
+- Chat
+- Search
+- Files
+- Limited image generation
+- Expanded memory
 
-Expiry:
-[ISI]
+## Trial exclusions
 
-Applicable modes:
-Chat dan Trade
+- Video
+- High-risk integrations
+- Unrestricted automation
+- Financial execution
+- Public bot publishing
 
-## Package 2
+## Upgrade messaging
+Show upgrade prompts only when relevant, such as when a feature or usage limit is reached. Do not interrupt users repeatedly.
 
-Nama:
-+150,000 token
+---
 
-Harga:
-RM14.90
+# 16. Additional Usage Credits
 
-Expiry:
-[ISI]
+## Working package A
+Usage credits: [CHECK]  
+Price: `RM5.90` [CHECK]  
+Validity: [CHECK]
 
-Applicable modes:
-Chat dan Trade
+## Working package B
+Usage credits: [CHECK]  
+Price: `RM14.90` [CHECK]  
+Validity: [CHECK]
+
+## Important pricing decision
+Consider describing purchased value as “credits” rather than raw “tokens”. Most non-technical users do not understand tokens and cannot easily predict how many they need.
 
 ## Payment provider
+Billplz [CHECK ACCOUNT AND INTEGRATION STATUS]
 
-[ISI]
+## Refund principle
+Create a clear policy covering:
 
-Cadangan semasa:
-Billplz
+- Unused purchased credits
+- Duplicate payments
+- Service failures
+- Fraudulent transactions
+- Expired credits
+- Subscription cancellation
+- Statutory consumer rights
 
-## Refund behaviour
-
-[ISI]
+Do not publish “no refund” language without legal review.
 
 ---
 
-# 12. User Profile dan Memory
+# 17. User Profile and Memory
 
 ## Profile fields
 
-- [x] Nama panggilan
-- [x] Avatar
-- [x] Bio
-- [x] Matlamat
-- [x] Bahasa
-- [x] Profession
-- [ ] Email visibility
-- [ ] Time zone
-- [ ] Lain-lain: [ISI]
+- Display name
+- Avatar
+- Bio
+- Goals
+- Preferred language
+- Profession
+- Communication preferences
 
-## Memory default
+## Memory behaviour
 
-Memory enabled by default:
-[ISI]
+Memory enabled by default: [CHECK]  
+Memory suggestions: Yes  
+Save method: Confirm before saving  
+View saved memories: Required  
+Edit saved memories: Required  
+Delete individual memories: Required  
+Clear all memories: Required  
+Export memories: Required
 
-Memory suggestions enabled by default:
-[ISI]
+## Retention
+[PRIVACY REVIEW REQUIRED]
 
-Memory retention:
-[ISI]
+## Prohibited automatic memory categories
 
-Maximum memories:
-[ISI]
+- Passwords
+- Authentication secrets
+- Full identity-card numbers
+- Payment-card information
+- Bank credentials
+- Private keys
+- Highly sensitive financial information
+- Health information without explicit consent
+- Information about another person without a valid purpose
 
-Sensitive memory categories:
-Tidak dibenarkan secara automatik
+## Memory promise
+Users should always understand:
 
----
-
-# 13. Bot Builder
-
-Maximum bots Free:
-[ISI]
-
-Maximum bots Pro:
-[ISI]
-
-Maximum bots Empire:
-[ISI]
-
-Skills Free:
-[ISI]
-
-Skills Pro:
-[ISI]
-
-Skills Empire:
-[ISI]
-
-Schedule limits:
-[ISI]
-
-Telegram support:
-[ISI]
-
-Email support:
-[ISI]
-
-Bot templates:
-[ISI]
+1. What AuraOne proposes to remember
+2. Why it may be useful
+3. Where it is stored
+4. How to edit or delete it
+5. Whether it is shared with a provider
 
 ---
 
-# 14. Integrations
+# 18. Assistant Builder
 
-Tandakan integrasi yang wujud atau dirancang.
+## Working limits
 
-| Connector | Status | Owner | Production-ready |
-|---|---|---|---|
-| Telegram | [ISI] | [ISI] | [ISI] |
-| Airtable | [ISI] | [ISI] | [ISI] |
-| Facebook Page | [ISI] | [ISI] | [ISI] |
-| Billplz | [ISI] | [ISI] | [ISI] |
-| Email | [ISI] | [ISI] | [ISI] |
-| WhatsApp | [ISI] | [ISI] | [ISI] |
-| Google Sheets | [ISI] | [ISI] | [ISI] |
+Free: 1 assistant  
+Pro: 3 assistants  
+Business: [CHECK]
 
----
+## Starter templates
 
-# 15. Repository
+1. Content Assistant
+2. Business Assistant
+3. E-commerce Assistant
+4. Customer Support Assistant
+5. Personal Productivity Assistant
 
-Git provider:
-[ISI]
+## Advanced templates
+Specialised financial-information assistants should be separated from general templates and include clear risk disclosures.
 
-Organisation:
-[ISI]
+## Skills
 
-Repository URL:
-[ISI]
+Free:
 
-Default branch:
-[ISI]
+- Chat
 
-Protected branches:
-[ISI]
+Pro:
 
-Branch strategy:
-[ISI]
+- Chat
+- Search
+- Files
+- Limited scheduling
 
-Pull request requirement:
-[ISI]
+Business:
 
-Required reviewers:
-[ISI]
+- Advanced scheduling
+- Eligible integrations
+- Expanded automation
+- Team features, future
 
-CODEOWNERS:
-[ISI]
+## Sharing
+Community sharing is planned, not available at MVP.
 
-Current package manager:
-[ISI]
+Before launch, sharing requires:
 
-Current runtime:
-[ISI]
-
-Current build tool:
-[ISI]
+- Moderation
+- Reporting
+- Permission controls
+- Malicious prompt review
+- Data-leakage prevention
+- Clear ownership rules
+- Published-content standards
 
 ---
 
-# 16. Infrastructure
+# 19. Integrations
 
-Hosting provider:
-[ISI]
+| Connector | Current status | Public readiness |
+|---|---|---:|
+| Telegram | Working internally | Not ready |
+| Airtable | Working internally | Not ready |
+| Facebook Page | Partial posting flow | Not ready |
+| Email | Working internally | Not ready |
+| Billplz | Planned | Not ready |
+| WhatsApp | Not started | Not ready |
+| Google Sheets | Not started | Not ready |
 
-Frontend hosting:
-[ISI]
+## Integration launch requirements
 
-Backend hosting:
-[ISI]
+Each public integration requires:
 
-Database:
-[ISI]
-
-Authentication:
-[ISI]
-
-Object storage:
-[ISI]
-
-CDN:
-[ISI]
-
-DNS:
-[ISI]
-
-Email provider:
-[ISI]
-
-Queue:
-[ISI]
-
-Scheduler:
-[ISI]
-
-Secret manager:
-[ISI]
-
-Monitoring:
-[ISI]
-
-Error tracking:
-[ISI]
-
-Analytics:
-[ISI]
-
-Log destination:
-[ISI]
-
-Backup strategy:
-[ISI]
-
-Recovery objective:
-[ISI]
+- User-specific OAuth or secure credentials
+- Explicit consent
+- Least-privilege permissions
+- Revocation
+- Audit logs
+- Clear failure messages
+- Tenant isolation
+- Secret encryption
+- Provider-policy compliance
 
 ---
 
-# 17. Environments
+# 20. Repository and Engineering
+
+Git provider: GitHub  
+Current account: Personal founder account [CHECK MIGRATION]  
+Organisation: `norliv-labs` [PROPOSED]  
+Repositories: [KEEP PRIVATE UNTIL REVIEWED]  
+Package managers: `uv` and `npm`  
+Runtime: Python 3.11  
+Frontend: Current vanilla JavaScript implementation [CHECK ROADMAP]
+
+## Recommended repository controls
+
+- Create a Norliv Labs GitHub organisation
+- Enable MFA
+- Protect the production branch
+- Require pull requests
+- Block secret commits
+- Enable dependency scanning
+- Enable code scanning where available
+- Use environment-based deployments
+- Remove secrets from repository history
+- Maintain a production release log
+
+## Branch strategy
+
+- `main`: production-ready
+- `develop`: optional integration branch
+- `feature/*`: isolated feature work
+- `hotfix/*`: urgent production fixes
+
+For a small team, prefer a simple protected `main` branch with short-lived feature branches.
+
+---
+
+# 21. Infrastructure
+
+## Current state
+
+Hosting: Cloud VPS  
+Frontend: GitHub Pages, migration planned  
+Backend: Self-hosted Hermes service  
+Database: SQLite for current prototype  
+Planned database and authentication: Supabase  
+Object storage: Current internal storage workflow  
+Scheduler: Cron  
+Email: Gmail-based internal workflow  
+Queue: None  
+Monitoring: Internal statistics collection  
+Error tracking: [CHECK]  
+Analytics: [CHECK]  
+Logs: VPS logs  
+Backups: [DEFINE]  
+Recovery objectives: [DEFINE]
+
+## Security rule
+Public product documentation must not contain:
+
+- Server IP addresses
+- Private network addresses
+- Internal ports
+- Admin URLs
+- Database paths
+- Passwords
+- Secret names that reveal sensitive architecture
+- Access instructions
+
+## Production requirements
+
+- Private origin server
+- HTTPS everywhere
+- Web application firewall or equivalent controls
+- Restricted admin access
+- Encrypted secrets
+- Automated backups
+- Backup restoration tests
+- Centralised logs
+- Error tracking
+- Uptime monitoring
+- Resource alerts
+- Documented incident process
+
+---
+
+# 22. Environments
 
 ## Local
-
-URL:
-[ISI]
-
-Data source:
-[ISI]
-
-Mock services:
-[ISI]
+Developer-only environment
 
 ## Development
-
-URL:
-[ISI]
-
-Deployment trigger:
-[ISI]
+Private environment with synthetic or test data
 
 ## Preview
-
-URL pattern:
-[ISI]
-
-Created from:
-[ISI]
+Per-change preview environment
 
 ## Staging
-
-URL:
-[ISI]
-
-Data policy:
-[ISI]
+Production-like environment with non-production data
 
 ## Production
+Customer-facing environment
 
-URL:
-[ISI]
-
-Deployment approval:
-[ISI]
-
-Rollback owner:
-[ISI]
+## Data policy
+Do not use customer production data in development, preview, or staging unless it has been properly anonymised and a valid operational reason has been approved.
 
 ---
 
-# 18. Data Residency dan Trust Claims
+# 23. Data Residency and Trust
 
-Current prototype storage:
-localStorage pada peranti pengguna
+## Current prototype
+Uses browser storage and server-side prototype storage.
 
-Production database region:
-[ISI]
+## Production plan
+[CHECK SUPABASE REGION AND PROVIDER TERMS]
 
-Backup region:
-[ISI]
+## Claims allowed before verification
 
-Logging region:
-[ISI]
+- `We use security controls designed to protect your information.`
+- `We do not sell your personal data.`
+- `You can request deletion of your account and associated data.`
 
-Permitted claim:
-[ISI]
+## Claims prohibited until independently verified
 
-Prohibited or unverified claim:
-[ISI]
+- `Your data never leaves Malaysia.`
+- `Your data is fully secure.`
+- `Your content is never retained by providers.`
+- `AuraOne is enterprise-grade.`
+- `AuraOne is compliant with every international privacy law.`
 
-Data deletion SLA:
-[ISI]
+## Planned controls
 
-Data export:
-[ISI]
-
-Data selling policy:
-Tiada data dijual
-
----
-
-# 19. Security
-
-Security owner:
-[ISI]
-
-MFA required for admin:
-[ISI]
-
-MFA required for infrastructure:
-[ISI]
-
-Secret rotation frequency:
-[ISI]
-
-Dependency scanning:
-[ISI]
-
-Secret scanning:
-[ISI]
-
-Vulnerability disclosure channel:
-[ISI]
-
-Incident contact:
-[ISI]
-
-Incident severity model:
-[ISI]
+Data export: JSON or another portable format [CHECK]  
+Deletion target: [LEGAL AND TECHNICAL REVIEW]  
+Data selling: Not permitted  
+Provider training: Must be disclosed accurately  
+Retention schedule: Must be documented
 
 ---
 
-# 20. Compliance dan Legal
+# 24. Security
 
-Privacy Policy status:
-[ISI]
+Security owner: Founder  
+Technical execution: Engineering owner  
+Final risk approval: Founder
 
-Terms status:
-[ISI]
+## Immediate critical actions
 
-Refund Policy status:
-[ISI]
+1. Rotate every credential previously shared through chat, logs, screenshots, or documents.
+2. Invalidate existing sessions connected to compromised credentials.
+3. Remove public access to internal administration services.
+4. Restrict administration to private networking.
+5. Enable MFA for infrastructure, source control, email, domains, and billing.
+6. Review repository history for exposed secrets.
+7. Move credentials into a proper secret-management process.
+8. Review logs for suspicious access.
+9. Document the incident and completed remediation.
 
-Cookie Policy status:
-[ISI]
+## Required controls
 
-PDPA review:
-[ISI]
+- Admin MFA
+- Infrastructure MFA
+- Secret rotation schedule
+- Dependency scanning
+- Rate limiting
+- Session expiry
+- Password hashing
+- Account lockout or abuse protection
+- Audit logs
+- Tenant-isolation tests
+- Backup restoration tests
+- Incident response playbook
+- Vulnerability disclosure email
 
-Age requirement:
-[ISI]
+## Vulnerability contact
+`security@auraone.my` [CHECK]
 
-AI disclaimer:
-[ISI]
+## Incident severity model
 
-Trading disclaimer:
-[ISI]
-
-Financial advice disclaimer:
-[ISI]
-
----
-
-# 21. Analytics
-
-Primary conversion:
-[ISI]
-
-Secondary conversions:
-[ISI]
-
-Events required:
-
-- [ ] signup_started
-- [ ] signup_completed
-- [ ] onboarding_completed
-- [ ] demo_message_sent
-- [ ] chat_message_sent
-- [ ] mode_selected
-- [ ] trial_started
-- [ ] trial_expired
-- [ ] pricing_viewed
-- [ ] upgrade_clicked
-- [ ] topup_completed
-- [ ] bot_created
-- [ ] memory_saved
-- [ ] connector_enabled
-
-Retention definition:
-[ISI]
-
-Active user definition:
-[ISI]
+- SEV-1: Confirmed data exposure, account takeover, or critical outage
+- SEV-2: Major degradation or high-risk vulnerability
+- SEV-3: Limited defect with workaround
+- SEV-4: Minor issue with low user impact
 
 ---
 
-# 22. Operational Ownership
+# 25. Compliance and Legal
 
-Product owner:
-[ISI]
+## Required before public launch
 
-Technical owner:
-[ISI]
+- [ ] Privacy Policy
+- [ ] Terms of Service
+- [ ] Refund Policy
+- [ ] Cookie notice, if applicable
+- [ ] Malaysian PDPA review
+- [ ] Payment-provider terms review
+- [ ] Subprocessor list
+- [ ] Data-retention policy
+- [ ] AI limitations disclosure
+- [ ] Financial-information disclaimer
+- [ ] Acceptable Use Policy
+- [ ] Age requirement decision
 
-Security owner:
-[ISI]
+## General AI disclosure
+`AuraOne can make mistakes. Verify important information before acting on it.`
 
-Deployment approver:
-[ISI]
+## Financial-information disclosure
+`Information provided through AuraOne is for general informational purposes only and is not financial or investment advice. Markets involve risk, and users remain responsible for their own decisions.`
 
-Incident commander:
-[ISI]
-
-Billing owner:
-[ISI]
-
-Customer support owner:
-[ISI]
-
----
-
-# 23. Constraints
-
-Budget:
-[ISI]
-
-Timeline:
-[ISI]
-
-Team size:
-[ISI]
-
-Must-use technology:
-[ISI]
-
-Technology to avoid:
-[ISI]
-
-Known technical debt:
-[ISI]
-
-External deadline:
-[ISI]
+## Important boundary
+AuraOne should provide information and analysis only unless a properly reviewed, authorised, and regulated execution capability is introduced later.
 
 ---
 
-# 24. Success Criteria
+# 26. Analytics
 
-MVP success:
-[ISI]
+## Primary conversion
+`signup_completed`
 
-Beta success:
-[ISI]
+## Activation event
+`first_successful_chat`
 
-Production success:
-[ISI]
+## Secondary events
 
-Performance target:
-[ISI]
+- `trial_started`
+- `first_search_completed`
+- `first_file_uploaded`
+- `memory_saved`
+- `assistant_created`
+- `credits_purchased`
+- `subscription_started`
+- `account_export_requested`
+- `account_deleted`
 
-Accessibility target:
-[ISI]
+## Suggested activation definition
+A user is activated after completing at least three meaningful interactions across two separate sessions within seven days. [CHECK]
 
-Reliability target:
-[ISI]
+## Active user definition
+At least one meaningful product interaction per week. [CHECK]
 
-Revenue target:
-[ISI]
+## Metrics
+
+- Visitor-to-sign-up conversion
+- Sign-up-to-first-chat conversion
+- Time to first useful response
+- Trial-to-paid conversion
+- Credit purchase conversion
+- Weekly active users
+- Four-week retention
+- Cost per active user
+- Gross margin per plan
+- Support requests per 100 users
+- Failed task rate
+- User-reported helpfulness
 
 ---
 
-# 25. Founder Notes
+# 27. Operational Ownership
 
-[ISI]
+Product owner: Khairul  
+Technical owner: [CHECK]  
+Security owner: Khairul  
+Deployment approver: Khairul  
+Incident commander: Khairul until a formal rotation exists  
+Billing owner: Khairul  
+Customer support: AI-assisted first line, human escalation to Khairul
 
+## Operational principle
+Do not assign final legal, financial, security, or incident accountability to an AI persona. A named human must remain accountable for decisions and escalation.
+
+---
+
+# 28. Constraints
+
+## Budget
+Zero-cost or low-cost start. Avoid unnecessary infrastructure burn.
+
+## Team
+Founder-led small team supported by AI tools and automation.
+
+## Required technology
+
+- Hermes engine
+- Billplz, subject to account approval
+- Supabase, subject to architecture review
+
+## Avoid
+
+- Idle GPU expenditure
+- Unnecessary model providers
+- Premature enterprise architecture
+- Building every capability before user validation
+- Public claims unsupported by production controls
+
+## Known technical debt
+
+- Prototype login must be replaced
+- Multi-tenant isolation is incomplete
+- Credit metering requires production implementation
+- Existing internal integrations require user-level permissions
+- Admin cockpit must remain separate from the customer product
+- Production monitoring and backups are incomplete
+
+---
+
+# 29. Product Roadmap
+
+## Phase 0: Security reset
+
+- Rotate exposed credentials
+- Restrict admin network access
+- Enable MFA
+- Review logs
+- Remove secrets from code and documentation
+- Separate admin and customer surfaces
+
+## Phase 1: SaaS foundation
+
+- Supabase authentication
+- User accounts
+- Tenant isolation
+- Core chat
+- Usage credits
+- Rate limits
+- Basic memory controls
+- Account deletion
+- Data export
+
+## Phase 2: Private alpha
+
+Target: 5 to 10 controlled users
+
+- Validate sign-up and login
+- Validate chat isolation
+- Validate usage metering
+- Observe costs
+- Collect task examples
+- Resolve critical usability issues
+
+## Phase 3: Malaysian beta
+
+Target: 25 weekly active users
+
+- English-first interface
+- Full Bahasa Melayu experience
+- Search
+- Files
+- Ready-made assistants
+- Payment flow
+- Support workflow
+- Basic product analytics
+
+## Phase 4: Public Malaysia launch
+
+- Stable billing
+- Legal pages
+- Production monitoring
+- Reliable backups
+- Image generation
+- Selected integrations
+- Referral or early-user programme
+
+## Phase 5: International readiness
+
+- USD pricing
+- International payment review
+- Localisation platform
+- Time-zone support
+- Provider and privacy review
+- Singapore and Brunei market testing
+- Wider international positioning
+
+---
+
+# 30. Success Criteria
+
+## MVP success
+
+- 5 to 10 beta users can sign up and chat
+- No known cross-tenant data leakage
+- Usage is measured accurately
+- Users can view their remaining credits
+- Users can manage and delete their data
+- Critical security controls are enabled
+
+## Beta success
+
+- 25 weekly active users
+- At least 10 successful paid transactions
+- Four-week retention measured
+- NPS above 40 [CHECK]
+- Support workload remains manageable
+- Positive gross margin on typical usage
+
+## Production success
+
+- 100 monthly active users
+- Paid conversion above 5 percent
+- 99.5 percent measured availability
+- No critical unresolved tenant-isolation issue
+- Stable payment and refund operations
+
+## Performance targets
+
+- First response begins within two seconds under normal conditions [CHECK]
+- Stable streaming experience
+- Clear timeout and retry behaviour
+- Mobile-responsive interface
+
+## Accessibility
+WCAG 2.2 AA fundamentals [CHECK]
+
+## Initial revenue target
+RM1,000 MRR in the first validated commercial stage [CHECK]
+
+---
+
+# 31. Founder Decisions Required
+
+## Brand
+
+- [ ] Confirm `AuraOne` as the official product name
+- [ ] Confirm `Norliv Labs` as the company or trading brand
+- [ ] Confirm `AuraOne by Norliv Labs`
+- [ ] Confirm the headline `One Place for Everything AI.`
+- [ ] Confirm the signature `Built in Malaysia. Ready for the world.`
+
+## Product
+
+- [ ] Confirm English as the default interface language
+- [ ] Confirm Bahasa Melayu as a first-class language
+- [ ] Confirm MVP scope
+- [ ] Decide whether financial analysis is included at initial public launch
+- [ ] Confirm memory default behaviour
+
+## Commercial
+
+- [ ] Validate Free, Pro, and Business plan structure
+- [ ] Validate prices against actual costs
+- [ ] Decide whether credits expire
+- [ ] Confirm Billplz readiness
+- [ ] Confirm refund principles
+
+## Legal and trust
+
+- [ ] Confirm legal entity
+- [ ] Create official support addresses
+- [ ] Complete privacy and terms review
+- [ ] Confirm minimum user age
+- [ ] Review Malaysian PDPA obligations
+- [ ] Publish accurate provider disclosures
+
+## Technical
+
+- [ ] Complete credential rotation
+- [ ] Close public admin access
+- [ ] Implement tenant isolation
+- [ ] Implement credits
+- [ ] Implement production authentication
+- [ ] Define backups and recovery
+- [ ] Add monitoring and error tracking
+
+---
+
+# 32. Founder Notes
+
+## North star
+`One Place for Everything AI.`
+
+## Product promise
+AuraOne gives people one personal AI workspace for conversations, content, analysis, automation, and everyday tasks.
+
+## Malaysian identity
+AuraOne is built in Malaysia and begins by serving Malaysian users well, without limiting its long-term international ambition.
+
+## Local campaign hook
+`Seorang pekerja. Seorang founder. Satu AI yang sentiasa membantu.`
+
+## Founder reminder
+Simplicity wins over feature count.
+
+The initial public product does not need to expose every internal capability. It needs to make the first useful experience simple, safe, fast, and memorable.
+
+## Final brand block
+
+**AuraOne**
+
+**One Place for Everything AI.**
+
+From conversations to content, analysis, automation, and everyday tasks.
+
+Built in Malaysia. Ready for the world.
+
+**AuraOne by Norliv Labs**
