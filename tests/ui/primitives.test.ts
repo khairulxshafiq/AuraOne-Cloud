@@ -10,12 +10,15 @@ import { Divider } from '@/components/ui/Divider';
 
 describe('UI Primitives (components/ui/)', () => {
   it('Button renders valid element with variant and accessibility states', () => {
-    const element = React.createElement(Button, {
-      variant: 'primary',
-      size: 'md',
-      isLoading: true,
-      children: 'Hantar',
-    });
+    const element = React.createElement(
+      Button,
+      {
+        variant: 'primary',
+        size: 'md',
+        isLoading: true,
+      },
+      'Hantar',
+    );
 
     expect(element.type).toBe(Button);
     expect(element.props.variant).toBe('primary');
@@ -48,11 +51,14 @@ describe('UI Primitives (components/ui/)', () => {
   });
 
   it('Badge supports dot indicators and semantic status variants', () => {
-    const element = React.createElement(Badge, {
-      variant: 'success',
-      dot: true,
-      children: 'Aktif',
-    });
+    const element = React.createElement(
+      Badge,
+      {
+        variant: 'success',
+        dot: true,
+      },
+      'Aktif',
+    );
 
     expect(element.props.variant).toBe('success');
     expect(element.props.dot).toBe(true);

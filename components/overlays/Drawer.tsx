@@ -8,7 +8,7 @@ export interface DrawerProps {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   side?: 'left' | 'right';
   className?: string;
 }
@@ -94,10 +94,7 @@ export const Drawer: React.FC<DrawerProps> = ({
       : 'right-0 animate-in slide-in-from-right';
 
   return (
-    <div
-      role="presentation"
-      className="fixed inset-0 z-[var(--aura-z-drawer)] flex"
-    >
+    <div role="presentation" className="fixed inset-0 z-[var(--aura-z-drawer)] flex">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in"

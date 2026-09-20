@@ -2,7 +2,7 @@ import React from 'react';
 
 export interface AppSidebarProps {
   brand?: React.ReactNode;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   footer?: React.ReactNode;
   className?: string;
 }

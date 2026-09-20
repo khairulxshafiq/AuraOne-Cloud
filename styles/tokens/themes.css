@@ -11,19 +11,19 @@
   color-scheme: dark;
 
   /* Surfaces & Backgrounds */
-  --bg-primary: var(--aura-neutral-900);         /* #0b0f19 */
-  --bg-elevated: var(--aura-neutral-850);        /* #111827 */
-  --bg-soft: var(--aura-neutral-800);            /* #161d2e */
+  --bg-primary: var(--aura-neutral-900); /* #0b0f19 */
+  --bg-elevated: var(--aura-neutral-850); /* #111827 */
+  --bg-soft: var(--aura-neutral-800); /* #161d2e */
   --surface-default: var(--aura-neutral-850);
   --surface-glass: rgba(17, 24, 39, 0.75);
-  --surface-hover: var(--aura-neutral-750);       /* #1c2538 */
-  --surface-active: var(--aura-neutral-700);      /* #242f46 */
+  --surface-hover: var(--aura-neutral-750); /* #1c2538 */
+  --surface-active: var(--aura-neutral-700); /* #242f46 */
   --surface-input: #0f1623;
 
   /* Typography */
-  --text-primary: var(--aura-neutral-100);       /* #f1f5f9 */
-  --text-secondary: var(--aura-neutral-400);     /* #94a3b8 */
-  --text-muted: var(--aura-neutral-500);         /* #64748b */
+  --text-primary: var(--aura-neutral-100); /* #f1f5f9 */
+  --text-secondary: var(--aura-neutral-400); /* #94a3b8 */
+  --text-muted: var(--aura-neutral-500); /* #64748b */
   --text-inverse: var(--aura-neutral-900);
 
   /* Borders & Dividers */
@@ -33,11 +33,11 @@
   --focus-ring: rgba(139, 92, 246, 0.6);
 
   /* Brand Accents */
-  --accent-primary: var(--aura-purple-500);      /* #8b5cf6 */
-  --accent-primary-hover: var(--aura-purple-600);/* #7c3aed */
+  --accent-primary: var(--aura-purple-500); /* #8b5cf6 */
+  --accent-primary-hover: var(--aura-purple-600); /* #7c3aed */
   --accent-primary-glow: rgba(139, 92, 246, 0.25);
-  --accent-premium: var(--aura-gold-500);        /* #f59e0b */
-  --accent-premium-hover: var(--aura-gold-600);  /* #d97706 */
+  --accent-premium: var(--aura-gold-500); /* #f59e0b */
+  --accent-premium-hover: var(--aura-gold-600); /* #d97706 */
   --accent-premium-glow: rgba(245, 158, 11, 0.25);
 
   /* Functional Feedback States */
@@ -83,9 +83,9 @@
   color-scheme: light;
 
   /* Surfaces & Backgrounds */
-  --bg-primary: #f8fafc;                          /* Crisp canvas */
-  --bg-elevated: #ffffff;                         /* Pure white elevated cards */
-  --bg-soft: #f1f5f9;                             /* Soft neutral container */
+  --bg-primary: #f8fafc; /* Crisp canvas */
+  --bg-elevated: #ffffff; /* Pure white elevated cards */
+  --bg-soft: #f1f5f9; /* Soft neutral container */
   --surface-default: #ffffff;
   --surface-glass: rgba(255, 255, 255, 0.85);
   --surface-hover: #f1f5f9;
@@ -93,9 +93,9 @@
   --surface-input: #ffffff;
 
   /* Typography */
-  --text-primary: #0f172a;                        /* Slate 900 */
-  --text-secondary: #475569;                      /* Slate 600 */
-  --text-muted: #64748b;                          /* Slate 500 */
+  --text-primary: #0f172a; /* Slate 900 */
+  --text-secondary: #475569; /* Slate 600 */
+  --text-muted: #64748b; /* Slate 500 */
   --text-inverse: #f8fafc;
 
   /* Borders & Dividers */
@@ -105,11 +105,11 @@
   --focus-ring: rgba(124, 58, 237, 0.6);
 
   /* Brand Accents */
-  --accent-primary: var(--aura-purple-600);       /* #7c3aed */
+  --accent-primary: var(--aura-purple-600); /* #7c3aed */
   --accent-primary-hover: var(--aura-purple-700); /* #6d28d9 */
   --accent-primary-glow: rgba(124, 58, 237, 0.15);
-  --accent-premium: var(--aura-gold-600);         /* #d97706 */
-  --accent-premium-hover: var(--aura-gold-700);   /* #b45309 */
+  --accent-premium: var(--aura-gold-600); /* #d97706 */
+  --accent-premium-hover: var(--aura-gold-700); /* #b45309 */
   --accent-premium-glow: rgba(217, 119, 6, 0.15);
 
   /* Functional Feedback States */
@@ -147,4 +147,3 @@
   --accent-2: #0284c7;
   --green: #059669;
 }
-

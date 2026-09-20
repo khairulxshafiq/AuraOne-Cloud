@@ -28,9 +28,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
         </nav>
 
         {footer && (
-          <div className="mt-4 pt-4 border-t border-[var(--border-subtle)] space-y-3">
-            {footer}
-          </div>
+          <div className="mt-4 pt-4 border-t border-[var(--border-subtle)] space-y-3">{footer}</div>
         )}
       </div>
     </Drawer>

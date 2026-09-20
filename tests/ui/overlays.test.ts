@@ -6,13 +6,16 @@ import { Tooltip } from '@/components/overlays/Tooltip';
 
 describe('Overlay Components (components/overlays/)', () => {
   it('Modal renders dialog with accessible ARIA properties when open', () => {
-    const element = React.createElement(Modal, {
-      isOpen: true,
-      onClose: () => {},
-      title: 'Tetapan Profil',
-      description: 'Kemaskini maklumat peribadi anda',
-      children: React.createElement('div', null, 'Kandungan Modal'),
-    });
+    const element = React.createElement(
+      Modal,
+      {
+        isOpen: true,
+        onClose: () => {},
+        title: 'Tetapan Profil',
+        description: 'Kemaskini maklumat peribadi anda',
+      },
+      React.createElement('div', null, 'Kandungan Modal'),
+    );
 
     expect(element.props.isOpen).toBe(true);
     expect(element.props.title).toBe('Tetapan Profil');
@@ -20,13 +23,16 @@ describe('Overlay Components (components/overlays/)', () => {
   });
 
   it('Drawer renders navigation drawer with designated orientation', () => {
-    const element = React.createElement(Drawer, {
-      isOpen: true,
-      onClose: () => {},
-      title: 'Navigasi Utama',
-      side: 'left',
-      children: React.createElement('nav', null, 'Menu'),
-    });
+    const element = React.createElement(
+      Drawer,
+      {
+        isOpen: true,
+        onClose: () => {},
+        title: 'Navigasi Utama',
+        side: 'left',
+      },
+      React.createElement('nav', null, 'Menu'),
+    );
 
     expect(element.props.isOpen).toBe(true);
     expect(element.props.side).toBe('left');
@@ -35,11 +41,14 @@ describe('Overlay Components (components/overlays/)', () => {
 
   it('Tooltip wraps target element and supplies accessible tooltip content', () => {
     const buttonChild = React.createElement('button', null, 'Tindakan');
-    const element = React.createElement(Tooltip, {
-      content: 'Penerangan butang',
-      position: 'top',
-      children: buttonChild,
-    });
+    const element = React.createElement(
+      Tooltip,
+      {
+        content: 'Penerangan butang',
+        position: 'top',
+      },
+      buttonChild,
+    );
 
     expect(element.props.content).toBe('Penerangan butang');
     expect(element.props.position).toBe('top');

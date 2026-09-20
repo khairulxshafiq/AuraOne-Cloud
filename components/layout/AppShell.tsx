@@ -31,7 +31,9 @@ export const AppShell: React.FC<AppShellProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className={`flex min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] ${className}`}>
+    <div
+      className={`flex min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] ${className}`}
+    >
       <SkipLink targetId="main-content" />
 
       {/* Desktop Sidebar */}
@@ -77,7 +79,11 @@ export const AppShell: React.FC<AppShellProps> = ({
           }
         />
 
-        <main id="main-content" tabIndex={-1} className="flex-1 flex flex-col min-h-0 focus:outline-hidden">
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className="flex-1 flex flex-col min-h-0 focus:outline-hidden"
+        >
           {children}
         </main>
       </div>

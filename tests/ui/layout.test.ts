@@ -27,20 +27,26 @@ describe('Layout & Application Shell Components (components/layout/)', () => {
   });
 
   it('AppSidebar renders navigation aside landmark with brand slot', () => {
-    const element = React.createElement(AppSidebar, {
-      brand: React.createElement('span', null, 'AuraOne'),
-      children: React.createElement('div', null, 'Links'),
-    });
+    const element = React.createElement(
+      AppSidebar,
+      {
+        brand: React.createElement('span', null, 'AuraOne'),
+      },
+      React.createElement('div', null, 'Links'),
+    );
 
     expect(element.props.brand).toBeDefined();
     expect(element.props.children).toBeDefined();
   });
 
   it('PublicShell establishes public landmark boundaries', () => {
-    const element = React.createElement(PublicShell, {
-      brand: React.createElement('span', null, 'AuraOne Public'),
-      children: React.createElement('p', null, 'Content'),
-    });
+    const element = React.createElement(
+      PublicShell,
+      {
+        brand: React.createElement('span', null, 'AuraOne Public'),
+      },
+      React.createElement('p', null, 'Content'),
+    );
 
     expect(element.props.brand).toBeDefined();
     expect(element.props.children).toBeDefined();

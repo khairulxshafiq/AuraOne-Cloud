@@ -6,13 +6,13 @@
 :root {
   /* 8px Scale Grid */
   --aura-space-0: 0px;
-  --aura-space-1: 4px;   /* 0.5x grid */
-  --aura-space-2: 8px;   /* 1x base */
-  --aura-space-3: 12px;  /* 1.5x */
-  --aura-space-4: 16px;  /* 2x */
-  --aura-space-5: 20px;  /* 2.5x */
-  --aura-space-6: 24px;  /* 3x */
-  --aura-space-8: 32px;  /* 4x */
+  --aura-space-1: 4px; /* 0.5x grid */
+  --aura-space-2: 8px; /* 1x base */
+  --aura-space-3: 12px; /* 1.5x */
+  --aura-space-4: 16px; /* 2x */
+  --aura-space-5: 20px; /* 2.5x */
+  --aura-space-6: 24px; /* 3x */
+  --aura-space-8: 32px; /* 4x */
   --aura-space-10: 40px; /* 5x */
   --aura-space-12: 48px; /* 6x */
   --aura-space-16: 64px; /* 8x */
@@ -38,4 +38,3 @@
   --aura-z-tooltip: 80;
   --aura-z-toast: 90;
 }
-

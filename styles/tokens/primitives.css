@@ -49,7 +49,7 @@
   --aura-neutral-300: #cbd5e1; /* Subtle text */
   --aura-neutral-200: #e2e8f0; /* Crisp border in light */
   --aura-neutral-100: #f1f5f9; /* Primary text in dark / surface in light */
-  --aura-neutral-50: #f8fafc;  /* Clean white-canvas */
+  --aura-neutral-50: #f8fafc; /* Clean white-canvas */
 
   /* ==========================================================================
      4. Feedback Palettes (Semantic Functional)
@@ -89,4 +89,3 @@
   --aura-radius-2xl: 24px;
   --aura-radius-full: 9999px;
 }
-

@@ -4,7 +4,7 @@ import React, { useState, useId } from 'react';
 
 export interface TooltipProps {
   content: React.ReactNode;
-  children: React.ReactElement<{
+  children?: React.ReactElement<{
     'aria-describedby'?: string;
     onMouseEnter?: (e: React.MouseEvent) => void;
     onMouseLeave?: (e: React.MouseEvent) => void;
@@ -33,6 +33,8 @@ export const Tooltip: React.FC<TooltipProps> = ({
 
   const handleOpen = () => setIsVisible(true);
   const handleClose = () => setIsVisible(false);
+
+  if (!children) return null;
 
   return (
     <div className="relative inline-flex items-center">
