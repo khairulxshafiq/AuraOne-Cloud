@@ -75,10 +75,7 @@ describe('Request Validation (lib/security/validation)', () => {
   });
 
   it('rejects total request body exceeding 64KB with 413', () => {
-    const result = validateChatPayload(
-      { message: 'Hello' },
-      MAX_REQUEST_BODY_BYTES + 1
-    );
+    const result = validateChatPayload({ message: 'Hello' }, MAX_REQUEST_BODY_BYTES + 1);
     expect(result.valid).toBe(false);
     if (!result.valid) {
       expect(result.status).toBe(413);
@@ -112,9 +109,7 @@ describe('Request Validation (lib/security/validation)', () => {
 
   it('rejects message history with invalid roles', () => {
     const payload = {
-      messages: [
-        { role: 'hacker_role', content: 'Test' },
-      ],
+      messages: [{ role: 'hacker_role', content: 'Test' }],
     };
     const result = validateChatPayload(payload);
     expect(result.valid).toBe(false);
@@ -138,4 +133,3 @@ describe('Request Validation (lib/security/validation)', () => {
     }
   });
 });
-

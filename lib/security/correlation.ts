@@ -11,4 +11,3 @@ export function resolveRequestId(incomingId?: string | null): string {
   }
   return randomUUID();
 }
-

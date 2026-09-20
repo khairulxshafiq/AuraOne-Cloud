@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
         401,
         'AUTH_REQUIRED',
         'Akses tidak sah. Sila log masuk ke akaun AuraOne anda terlebih dahulu.',
-        requestId
+        requestId,
       );
     }
 
@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
         'RATE_LIMITED',
         'Had kekerapan permintaan telah dicapai. Sila tunggu sebentar sebelum menghantar mesej baru.',
         requestId,
-        rateLimit.resetSeconds
+        rateLimit.resetSeconds,
       );
     }
 
@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
         400,
         'INVALID_INPUT',
         'Gagal membaca data permintaan.',
-        requestId
+        requestId,
       );
     }
 
@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
         400,
         'INVALID_INPUT',
         'Format data mestilah JSON yang sah.',
-        requestId
+        requestId,
       );
     }
 
@@ -93,7 +93,7 @@ export async function POST(req: NextRequest) {
         validation.status,
         validation.code,
         validation.error,
-        requestId
+        requestId,
       );
     }
 
@@ -122,7 +122,7 @@ export async function POST(req: NextRequest) {
           {
             signal: req.signal,
             requestId,
-          }
+          },
         );
       } catch (err: unknown) {
         const errorMessage = err instanceof Error ? err.message : String(err);
@@ -164,7 +164,7 @@ export async function POST(req: NextRequest) {
       headers: {
         'Content-Type': 'text/event-stream',
         'Cache-Control': 'no-cache, no-transform',
-        'Connection': 'keep-alive',
+        Connection: 'keep-alive',
         'x-request-id': requestId,
       },
     });
@@ -177,7 +177,7 @@ export async function POST(req: NextRequest) {
       500,
       'INTERNAL_ERROR',
       'Ralat dalaman pelayan. Sila cuba sebentar lagi.',
-      requestId
+      requestId,
     );
   }
 }

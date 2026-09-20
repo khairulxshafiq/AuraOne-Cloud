@@ -1,0 +1,23 @@
+# Build artifacts
+.next/
+dist/
+build/
+coverage/
+
+# Dependencies
+node_modules/
+
+# Lock files
+package-lock.json
+
+# Environment files
+.env*.local
+.env
+
+# Documentation (protect audit reports, ADRs, and project specs)
+docs/
+
+# Logs and system generated
+*.log
+.system_generated/
+

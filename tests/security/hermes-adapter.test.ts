@@ -14,34 +14,42 @@ describe('Hermes Adapter Boundary (adapters/hermes)', () => {
     it('throws error when HERMES_GATEWAY_URL is missing', () => {
       delete process.env.HERMES_GATEWAY_URL;
       expect(() => new HermesGatewayAdapter({ gatewayUrl: '' })).toThrow(
-        'HERMES_GATEWAY_URL tidak dikonfigurasi'
+        'HERMES_GATEWAY_URL tidak dikonfigurasi',
       );
     });
 
     it('throws error on invalid URL format', () => {
       expect(() => new HermesGatewayAdapter({ gatewayUrl: 'not-a-valid-url' })).toThrow(
-        'Format HERMES_GATEWAY_URL tidak sah'
+        'Format HERMES_GATEWAY_URL tidak sah',
       );
     });
 
     it('rejects plain HTTP in production mode by default', () => {
       Object.defineProperty(process.env, 'NODE_ENV', { value: 'production', configurable: true });
       expect(
-        () => new HermesGatewayAdapter({ gatewayUrl: 'http://43.134.124.127:9119', allowInsecureHttp: false })
+        () =>
+          new HermesGatewayAdapter({
+            gatewayUrl: 'http://43.134.124.127:9119',
+            allowInsecureHttp: false,
+          }),
       ).toThrow('Protokol HTTP tidak selamat ditolak dalam mod produksi');
     });
 
     it('allows HTTPS in production mode', () => {
       Object.defineProperty(process.env, 'NODE_ENV', { value: 'production', configurable: true });
       expect(
-        () => new HermesGatewayAdapter({ gatewayUrl: 'https://gateway.auraone.my' })
+        () => new HermesGatewayAdapter({ gatewayUrl: 'https://gateway.auraone.my' }),
       ).not.toThrow();
     });
 
     it('allows HTTP in production only when explicitly overridden for local/debug access', () => {
       Object.defineProperty(process.env, 'NODE_ENV', { value: 'production', configurable: true });
       expect(
-        () => new HermesGatewayAdapter({ gatewayUrl: 'http://localhost:9119', allowInsecureHttp: true })
+        () =>
+          new HermesGatewayAdapter({
+            gatewayUrl: 'http://localhost:9119',
+            allowInsecureHttp: true,
+          }),
       ).not.toThrow();
     });
   });
@@ -58,7 +66,7 @@ describe('Hermes Adapter Boundary (adapters/hermes)', () => {
         },
         {
           requestId: 'test-req-1234567890',
-        }
+        },
       );
 
       const reader = stream.getReader();
@@ -82,8 +90,8 @@ describe('Hermes Adapter Boundary (adapters/hermes)', () => {
       await expect(
         adapter.streamChat(
           { message: 'Hi', sessionId: 's1', agentId: 'aura', userId: 'u1' },
-          { requestId: 'req-1' }
-        )
+          { requestId: 'req-1' },
+        ),
       ).rejects.toThrow('UPSTREAM_TIMEOUT');
     });
 
@@ -92,8 +100,8 @@ describe('Hermes Adapter Boundary (adapters/hermes)', () => {
       await expect(
         adapter.streamChat(
           { message: 'Hi', sessionId: 's1', agentId: 'aura', userId: 'u1' },
-          { requestId: 'req-1' }
-        )
+          { requestId: 'req-1' },
+        ),
       ).rejects.toThrow('UPSTREAM_ERROR');
     });
   });

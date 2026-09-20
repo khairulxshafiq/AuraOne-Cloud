@@ -42,7 +42,10 @@ export async function authenticateChatRequest(req: NextRequest): Promise<Authent
     const authHeader = req.headers.get('authorization');
     const token = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : undefined;
 
-    const { data: { user }, error } = await supabase.auth.getUser(token);
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser(token);
 
     if (error || !user) {
       return null;
@@ -56,4 +59,3 @@ export async function authenticateChatRequest(req: NextRequest): Promise<Authent
     return null;
   }
 }
-

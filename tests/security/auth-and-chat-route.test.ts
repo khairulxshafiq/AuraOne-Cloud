@@ -166,4 +166,3 @@ describe('Chat API Route Security & Authentication (app/api/chat/route.ts)', () 
     expect(data.error.message).toContain('Had kekerapan permintaan telah dicapai');
   });
 });
-

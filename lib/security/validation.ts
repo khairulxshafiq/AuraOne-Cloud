@@ -3,7 +3,7 @@ export const MAX_REQUEST_BODY_BYTES = 65536; // 64 KB
 export const MAX_MESSAGE_COUNT = 30;
 
 export const ALLOWED_ROLES = ['user', 'assistant', 'system'] as const;
-export type MessageRole = typeof ALLOWED_ROLES[number];
+export type MessageRole = (typeof ALLOWED_ROLES)[number];
 
 export const ALLOWED_AGENTS = [
   'Aura',
@@ -14,12 +14,12 @@ export const ALLOWED_AGENTS = [
   'Aura-Vision',
 ] as const;
 
-export type AllowedAgent = typeof ALLOWED_AGENTS[number];
+export type AllowedAgent = (typeof ALLOWED_AGENTS)[number];
 
 export const DEFAULT_AGENT: AllowedAgent = 'Aura';
 
 export const AGENT_HERMES_MAPPING: Record<AllowedAgent, string> = {
-  'Aura': 'aura',
+  Aura: 'aura',
   'Aura-Trade': 'aura-trade',
   'Aura-Pen': 'aura-pen',
   'Aura-Art': 'aura-art',
@@ -187,7 +187,10 @@ export function validateChatPayload(rawBody: unknown, byteLength?: number): Vali
   // Agent validation
   let agent: AllowedAgent = DEFAULT_AGENT;
   if (record.agent !== undefined && record.agent !== null && record.agent !== '') {
-    if (typeof record.agent !== 'string' || !ALLOWED_AGENTS.includes(record.agent as AllowedAgent)) {
+    if (
+      typeof record.agent !== 'string' ||
+      !ALLOWED_AGENTS.includes(record.agent as AllowedAgent)
+    ) {
       return {
         valid: false,
         status: 400,
@@ -211,4 +214,3 @@ export function validateChatPayload(rawBody: unknown, byteLength?: number): Vali
     },
   };
 }
-

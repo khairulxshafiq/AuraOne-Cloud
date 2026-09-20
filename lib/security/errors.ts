@@ -22,7 +22,7 @@ export function createSafeErrorResponse(
   code: ErrorCategory,
   message: string,
   requestId?: string,
-  retryAfter?: number
+  retryAfter?: number,
 ): Response {
   const body: SafeErrorResponse = {
     error: {
@@ -49,4 +49,3 @@ export function createSafeErrorResponse(
     headers,
   });
 }
-

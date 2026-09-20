@@ -47,4 +47,3 @@ export const safeLogger = {
     this.log({ level: 'error', event, ...meta });
   },
 };
-

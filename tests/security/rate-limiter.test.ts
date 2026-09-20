@@ -50,4 +50,3 @@ describe('Rate Limiter (lib/security/rate-limiter)', () => {
     expect(bobResult.remaining).toBe(2);
   });
 });
-

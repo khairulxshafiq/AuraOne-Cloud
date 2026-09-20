@@ -71,4 +71,3 @@ export class MemoryRateLimiter implements IRateLimiter {
 }
 
 export const defaultChatRateLimiter = new MemoryRateLimiter(20, 60);
-

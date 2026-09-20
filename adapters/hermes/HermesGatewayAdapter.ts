@@ -19,7 +19,8 @@ export class HermesGatewayAdapter implements IHermesAdapter {
     this.gatewaySecret = config?.gatewaySecret || process.env.HERMES_GATEWAY_SECRET;
 
     const isProduction = process.env.NODE_ENV === 'production';
-    const allowInsecure = config?.allowInsecureHttp ?? (process.env.ALLOW_INSECURE_HERMES_HTTP === 'true');
+    const allowInsecure =
+      config?.allowInsecureHttp ?? process.env.ALLOW_INSECURE_HERMES_HTTP === 'true';
 
     if (!rawUrl) {
       throw new Error('HERMES_GATEWAY_URL tidak dikonfigurasi pada pelayan.');
@@ -34,7 +35,7 @@ export class HermesGatewayAdapter implements IHermesAdapter {
 
     if (isProduction && parsed.protocol !== 'https:' && !allowInsecure) {
       throw new Error(
-        'Protokol HTTP tidak selamat ditolak dalam mod produksi. Sila gunakan HTTPS untuk HERMES_GATEWAY_URL.'
+        'Protokol HTTP tidak selamat ditolak dalam mod produksi. Sila gunakan HTTPS untuk HERMES_GATEWAY_URL.',
       );
     }
 
@@ -44,7 +45,7 @@ export class HermesGatewayAdapter implements IHermesAdapter {
 
   async streamChat(
     request: HermesChatRequest,
-    options: HermesAdapterOptions
+    options: HermesAdapterOptions,
   ): Promise<ReadableStream<Uint8Array>> {
     const { signal, requestId } = options;
 
@@ -105,7 +106,7 @@ export class HermesGatewayAdapter implements IHermesAdapter {
             ...(this.gatewaySecret ? { 'X-Aura-Secret': this.gatewaySecret } : {}),
           },
           signal: combinedSignal,
-        }
+        },
       );
 
       clearTimeout(timeoutId);
@@ -123,10 +124,7 @@ export class HermesGatewayAdapter implements IHermesAdapter {
     } catch (err: unknown) {
       clearTimeout(timeoutId);
 
-      if (
-        (err instanceof Error && err.name === 'AbortError') ||
-        timeoutController.signal.aborted
-      ) {
+      if ((err instanceof Error && err.name === 'AbortError') || timeoutController.signal.aborted) {
         if (signal?.aborted) {
           safeLogger.warn('Hermes request aborted by client', { requestId });
           throw new Error('CLIENT_ABORTED');
