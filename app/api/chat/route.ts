@@ -1,122 +1,183 @@
-import { NextRequest } from "next/server";
+import { NextRequest } from 'next/server';
+import { authenticateChatRequest } from '@/lib/supabase-server';
+import { validateChatPayload } from '@/lib/security/validation';
+import { defaultChatRateLimiter } from '@/lib/security/rate-limiter';
+import { resolveRequestId } from '@/lib/security/correlation';
+import { createSafeErrorResponse } from '@/lib/security/errors';
+import { safeLogger } from '@/lib/logger';
+import { HermesGatewayAdapter } from '@/adapters/hermes/HermesGatewayAdapter';
+import { generateFallbackStream } from '@/lib/fallback-chat';
 
-export const runtime = "nodejs";
+export const runtime = 'nodejs';
 
 export async function POST(req: NextRequest) {
-  try {
-    const { message, sessionId = "default", agent = "Aura" } = await req.json();
+  const startTime = Date.now();
+  const requestId = resolveRequestId(req.headers.get('x-request-id'));
 
-    if (!message) {
-      return new Response(JSON.stringify({ error: "Mesej diperlukan" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
+  safeLogger.info('Chat request received', { requestId });
+
+  try {
+    // 1. Server-Side Authentication Guard (ADR-0006, SEC-001)
+    const user = await authenticateChatRequest(req);
+    if (!user) {
+      safeLogger.warn('Chat request rejected: unauthenticated', {
+        requestId,
+        statusCode: 401,
+        errorCategory: 'AUTH_REQUIRED',
       });
+      return createSafeErrorResponse(
+        401,
+        'AUTH_REQUIRED',
+        'Akses tidak sah. Sila log masuk ke akaun AuraOne anda terlebih dahulu.',
+        requestId
+      );
     }
 
-    const gatewayUrl = process.env.HERMES_GATEWAY_URL || process.env.NEXT_PUBLIC_GATEWAY_URL;
+    // 2. Server-Side Rate Limiting (ADR-0007, SEC-003)
+    const rateLimit = await defaultChatRateLimiter.check(user.id);
+    if (!rateLimit.allowed) {
+      safeLogger.warn('Chat request rejected: rate limit exceeded', {
+        requestId,
+        userId: user.id,
+        statusCode: 429,
+        errorCategory: 'RATE_LIMITED',
+      });
+      return createSafeErrorResponse(
+        429,
+        'RATE_LIMITED',
+        'Had kekerapan permintaan telah dicapai. Sila tunggu sebentar sebelum menghantar mesej baru.',
+        requestId,
+        rateLimit.resetSeconds
+      );
+    }
 
-    // Stream generator
-    const stream = new ReadableStream({
-      async start(controller) {
-        const encoder = new TextEncoder();
+    // 3. Request Body Parsing & Defensive Validation (SEC-010)
+    let rawText = '';
+    try {
+      rawText = await req.text();
+    } catch {
+      return createSafeErrorResponse(
+        400,
+        'INVALID_INPUT',
+        'Gagal membaca data permintaan.',
+        requestId
+      );
+    }
 
-        const sendToken = (text: string) => {
-          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text })}\n\n`));
-        };
+    let rawJson: unknown;
+    try {
+      rawJson = JSON.parse(rawText);
+    } catch {
+      safeLogger.warn('Chat request rejected: malformed JSON', {
+        requestId,
+        userId: user.id,
+        statusCode: 400,
+      });
+      return createSafeErrorResponse(
+        400,
+        'INVALID_INPUT',
+        'Format data mestilah JSON yang sah.',
+        requestId
+      );
+    }
 
-        // Try forwarding to Hermes VPS Gateway if configured and available
-        let forwarded = false;
-        if (gatewayUrl) {
-          try {
-            const controllerAbort = new AbortController();
-            const timeout = setTimeout(() => controllerAbort.abort(), 3500);
+    const validation = validateChatPayload(rawJson, Buffer.byteLength(rawText, 'utf8'));
+    if (!validation.valid) {
+      safeLogger.warn('Chat request rejected: invalid payload', {
+        requestId,
+        userId: user.id,
+        statusCode: validation.status,
+        errorCategory: validation.code,
+      });
+      return createSafeErrorResponse(
+        validation.status,
+        validation.code,
+        validation.error,
+        requestId
+      );
+    }
 
-            const gwRes = await fetch(`${gatewayUrl}/api/chat/start`, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ message, session_id: sessionId }),
-              signal: controllerAbort.signal,
-            });
-            clearTimeout(timeout);
+    const { message, sessionId, agent, hermesAgentId } = validation.data;
 
-            if (gwRes.ok) {
-              const gwData = await gwRes.json();
-              if (gwData.stream_id) {
-                const streamRes = await fetch(`${gatewayUrl}/api/chat/stream?stream_id=${gwData.stream_id}`);
-                if (streamRes.body) {
-                  const reader = streamRes.body.getReader();
-                  while (true) {
-                    const { done, value } = await reader.read();
-                    if (done) break;
-                    controller.enqueue(value);
-                  }
-                  forwarded = true;
-                }
-              }
-            }
-          } catch {
-            forwarded = false;
+    safeLogger.info('Chat request validated', {
+      requestId,
+      userId: user.id,
+      agent,
+    });
+
+    // 4. Hermes Gateway Forwarding with Safe Fallback (ADR-0005, RR-ARC-003)
+    const gatewayUrl = process.env.HERMES_GATEWAY_URL;
+    let stream: ReadableStream<Uint8Array>;
+
+    if (gatewayUrl) {
+      try {
+        const adapter = new HermesGatewayAdapter({ gatewayUrl });
+        stream = await adapter.streamChat(
+          {
+            message,
+            sessionId,
+            agentId: hermesAgentId,
+            userId: user.id,
+          },
+          {
+            signal: req.signal,
+            requestId,
           }
+        );
+      } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : String(err);
+
+        if (errorMessage === 'CLIENT_ABORTED') {
+          safeLogger.info('Request cancelled by client', { requestId, userId: user.id });
+          return new Response(null, { status: 499 });
         }
 
-        // Fallback intelligent Aura response streaming if gateway is offline/unreachable
-        if (!forwarded) {
-          const intro = `Hai! Saya **${agent}** (AuraOne Cloud Assistant).\n\n`;
-          sendToken(intro);
-
-          let reply = "";
-          const lowerMsg = message.toLowerCase();
-
-          if (lowerMsg.includes("salam") || lowerMsg.includes("hi") || lowerMsg.includes("halo") || lowerMsg.includes("hello")) {
-            reply = `Ada apa-apa yang boleh saya bantu anda uruskan hari ini? Anda boleh tanya saya tentang:\n\n` +
-              `- 📊 **Analisis Pasaran & Saham** (Aura-Trade Trading Engine)\n` +
-              `- ✍️ **Kandungan & Penulisan Sakluma** (Aura-Pen Content Engine)\n` +
-              `- 🎨 **Penjanaan Imej AI** (Aura-Art FLUX LoRA)\n` +
-              `- 📡 **Radar Trend & Scrape Media** (Aura-Scout Intelligence)\n` +
-              `- 🎬 **Video & Media Motion** (Aura-Vision Pipeline)\n` +
-              `- ⚙️ **Konfigurasi Agen & Integrasi Workflow**\n\n` +
-              `Sila beritahu saya apa objektif anda!`;
-          } else if (lowerMsg.includes("kredit") || lowerMsg.includes("credit") || lowerMsg.includes("payg") || lowerMsg.includes("harga")) {
-            reply = `Sistem AuraOne Cloud menggunakan sistem **Pay-As-You-Go (PAYG)**.\n\n` +
-              `- Setiap pengguna Beta mendapat **RM10.00 kredit percuma** permulaan.\n` +
-              `- Kos penggunaan ditolak secara telus mengikut jumlah token soalan & respons.\n` +
-              `- Tambah nilai (topup) boleh dilakukan dengan pantas melalui integrasi FPX tempatan (Fasa 0b).`;
-          } else if (lowerMsg.includes("sakluma") || lowerMsg.includes("daging") || lowerMsg.includes("salai")) {
-            reply = `Jenama **Sakluma** (Daging Salai Tempurung Kelapa) adalah salah satu tunjang operasi komersial AuraOne.\n\n` +
-              `Ejen **Aura-Pen** bertanggungjawab menghasilkan draf konten beremosi dan promosi di Facebook/TikTok, manakala **Aura-Art** menjana visual produk yang memukau.`;
-          } else {
-            reply = `Mesej anda: "*${message}*"\n\n` +
-              `Saya telah merekodkan konteks perbualan ini ke dalam sesi kerja (*workspace sandbox*) anda di AuraOne Cloud.\n\n` +
-              `Sebagai pembantu AI berbilang ejen dengan piawaian Bahasa Melayu pintar, saya sedia membantu anda menyusun pelan tindakan, menjana teks, atau memproses tugasan automasi anda.`;
-          }
-
-          // Simulate fluid typing stream
-          const chunks = reply.split(" ");
-          for (const chunk of chunks) {
-            sendToken(chunk + " ");
-            await new Promise((r) => setTimeout(r, 25));
-          }
-
-          controller.enqueue(encoder.encode(`data: [DONE]\n\n`));
+        if (errorMessage === 'UPSTREAM_TIMEOUT') {
+          safeLogger.warn('Upstream Hermes timeout triggered fallback', {
+            requestId,
+            userId: user.id,
+            durationMs: Date.now() - startTime,
+          });
+          stream = generateFallbackStream(message, agent);
+        } else {
+          safeLogger.warn('Hermes gateway unreachable; activating intelligent fallback', {
+            requestId,
+            userId: user.id,
+            errorDetail: errorMessage,
+          });
+          stream = generateFallbackStream(message, agent);
         }
+      }
+    } else {
+      // Local dev or gateway unconfigured: serve intelligent BM fallback
+      stream = generateFallbackStream(message, agent);
+    }
 
-        controller.close();
-      },
+    safeLogger.info('Streaming response started', {
+      requestId,
+      userId: user.id,
+      agent,
+      durationMs: Date.now() - startTime,
     });
 
     return new Response(stream, {
       headers: {
-        "Content-Type": "text/event-stream",
-        "Cache-Control": "no-cache, no-transform",
-        Connection: "keep-alive",
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache, no-transform',
+        'Connection': 'keep-alive',
+        'x-request-id': requestId,
       },
     });
   } catch (err: unknown) {
-    const errorMsg = err instanceof Error ? err.message : "Ralat tidak diketahui";
-    return new Response(JSON.stringify({ error: errorMsg }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
+    safeLogger.error('Internal server error in chat route', {
+      requestId,
+      errorDetail: err instanceof Error ? err.message : String(err),
     });
+    return createSafeErrorResponse(
+      500,
+      'INTERNAL_ERROR',
+      'Ralat dalaman pelayan. Sila cuba sebentar lagi.',
+      requestId
+    );
   }
 }
-
