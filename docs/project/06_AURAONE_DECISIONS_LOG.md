@@ -401,3 +401,62 @@ content, payment details and raw system prompts.
 Reason:
 Auditability must not create a new privacy or security risk.
 
+---
+
+# DEC-017: Doc Set Consolidation
+
+Date:
+2026-09-20
+
+Status:
+Accepted
+
+Decision owner:
+Khairul Shafiq (Founder) via AuraOne DevOps audit
+
+Context:
+Docs pack originally contained two structural duplicates
+(07 Execution Guide = exact copy of 06 Decisions Log; 08 Definition
+of Done = approximate copy of 02 Endstate Vision). This causes
+ambiguity when AI agents follow reading order and when references
+exist in PR descriptions or cron jobs.
+
+Decision:
+1. Delete `07_AURAONE_EXECUTION_GUIDE.md` entirely.
+2. Make `02_AURAONE_ENDSTATE_VISION.md` the canonical
+   Definition-of-Done document (version bumped to 1.1).
+3. Convert `08_AURAONE_DEFINITION_OF_DONE.md` into a permanent
+   redirect stub pointing to 02.
+4. Reading order in 00_READ_ME_FIRST.md renumbered accordingly.
+5. Phase numbering: Engineering phases (Design System & Shell)
+   labelled Phase 1C in operational instructions; product roadmap
+   numbering (Private Alpha = Phase 2) taken from
+   01_AURAONE_PROJECT_INPUT.md.
+
+Reason:
+One canonical document per concern. Prevents agent drift and
+re-read overhead. Redirect stub preserves external links.
+
+Alternatives considered:
+- Keep both 02 and 08 in sync manually
+- Delete 08 outright
+
+Consequences:
+- Positive: single source of truth, no copy drift
+- Negative: file number sequence now skips 07
+- Trade-offs: accepted — stability over aesthetics
+
+Implementation impact:
+None at runtime. Documentation governance only.
+
+Security impact:
+None.
+
+Migration or rollback:
+Git history preserves the deleted 07.
+
+Related ADR:
+n/a — documentation governance
+
+Supersedes:
+None

@@ -3,9 +3,9 @@
 # AuraOne Cloud Documentation Pack
 
 Version: 1.0  
-Status: Pre-Audit Planning  
-Document owner: [ISI NAMA PEMILIK]  
-Last updated: [ISI TARIKH]
+Status: Active — executed via phases  
+Document owner: Khairul Shafiq (Founder), AuraOne by Norliv Labs  
+Last updated: 2026-09-20
 
 ---
 
@@ -40,8 +40,7 @@ Semua AI agent, developer, DevOps engineer dan auditor mesti membaca fail dalam 
 5. `04_AURAONE_MASTER_BLUEPRINT.md`
 6. `05_AURAONE_PHASE_PLAN.md`
 7. `06_AURAONE_DECISIONS_LOG.md`
-8. `07_AURAONE_EXECUTION_GUIDE.md`
-9. `08_AURAONE_DEFINITION_OF_DONE.md`
+8. `08_AURAONE_DEFINITION_OF_DONE.md` (redirect stub -> baca 02)
 
 Selepas itu, baca:
 
@@ -172,21 +171,21 @@ Gunakan arahan berikut:
 Baca semua dokumen di dalam /docs/project mengikut urutan yang
 ditetapkan dalam 00_READ_ME_FIRST.md.
 
-Jangan ubah source code terlebih dahulu.
+Status semasa: Phase 0A/0B/0C + Phase 1A SIAP (PR #1 merged ke main).
+Phase 1B preflight dah siap, tunggu founder approval untuk bermula.
 
-Mulakan Phase 0A sahaja: Read-Only Discovery.
-
-Audit keadaan semasa AuraOne dan semua integrasi Hermes yang berkaitan.
-
-Jangan memulakan Phase 0B, Phase 0C atau implementasi feature secara
-automatik.
-
-Pada akhir Phase 0A:
-1. Hasilkan report yang diwajibkan.
-2. Senaraikan fakta, andaian dan perkara yang masih tidak diketahui.
-3. Jalankan quality gate.
-4. Berikan status PASS atau FAIL.
-5. Berhenti dan tunggu arahan founder.
+Arahan semasa:
+- Jalankan Phase 1B: DevOps & Quality Foundation (ikut
+  docs/implementation/phase-1b-preflight.md).
+- MUST-DO items dalam Phase 1B: CI workflow (npm run check),
+  .nvmrc Node 22, prettier + coverage scripts, tanaman remediation
+  P17 (Supabase hardcoded fallback URL) and P20 (staging vs
+  production Supabase environment separation).
+- Numbering rule: gunakan roadmap dari 01_AURAONE_PROJECT_INPUT.md
+  (Phase 2 = Private Alpha). Design System phase dalam 05 phase plan
+  dirujuk sebagai "Phase 1C" supaya tiada konflik nombor.
+- One phase at a time. Berhenti dan tunggu arahan founder selepas
+  setiap phase gate.
 ```
 
 ---

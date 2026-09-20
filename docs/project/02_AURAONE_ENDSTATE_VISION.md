@@ -2,7 +2,8 @@
 
 # AuraOne Cloud Definition of Done
 
-Version: 1.0
+Version: 1.1
+Status: CANONICAL — dokumentasi Definasi Siap utama. (07 Execution Guide adalah duplicate yang telah dipadam; 08 merujuk entri ini juga.)
 
 A feature, phase or release is not complete merely because it appears
 correct in the browser.
