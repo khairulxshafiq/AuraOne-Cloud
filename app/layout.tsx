@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/lib/theme/ThemeContext';
 import { themeInitScript } from '@/lib/theme/theme-script';
+import { ToastProvider } from '@/components/feedback/Toast';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -31,7 +32,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="antialiased selection:bg-[var(--accent-primary-glow)] selection:text-[var(--text-primary)]">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
