@@ -1,0 +1,37 @@
+/**
+ * AuraOne Design System — Motion & Transition Tokens
+ * Restrained micro-interactions with first-class prefers-reduced-motion support.
+ */
+
+:root {
+  /* Durations */
+  --aura-duration-fast: 150ms;
+  --aura-duration-normal: 200ms;
+  --aura-duration-slow: 300ms;
+
+  /* Easing Curves */
+  --aura-ease-default: cubic-bezier(0.16, 1, 0.3, 1);
+  --aura-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --aura-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --aura-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Composite Transitions */
+  --aura-transition-fade: opacity var(--aura-duration-normal) var(--aura-ease-out);
+  --aura-transition-transform: transform var(--aura-duration-normal) var(--aura-ease-default);
+  --aura-transition-colors: background-color var(--aura-duration-fast) var(--aura-ease-out),
+    border-color var(--aura-duration-fast) var(--aura-ease-out),
+    color var(--aura-duration-fast) var(--aura-ease-out);
+}
+
+/* Reduced Motion Override (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --aura-duration-fast: 0ms;
+    --aura-duration-normal: 0ms;
+    --aura-duration-slow: 0ms;
+    --aura-transition-fade: none;
+    --aura-transition-transform: none;
+    --aura-transition-colors: none;
+  }
+}
+

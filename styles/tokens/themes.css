@@ -1,0 +1,150 @@
+/**
+ * AuraOne Design System — Themes Token System
+ * Maps primitive values to semantic variables for Dark, Light, and System themes.
+ */
+
+/* =============================================================================
+   1. Default Theme: Dark (AuraOne Primary Aesthetic)
+   ============================================================================= */
+:root,
+.dark {
+  color-scheme: dark;
+
+  /* Surfaces & Backgrounds */
+  --bg-primary: var(--aura-neutral-900);         /* #0b0f19 */
+  --bg-elevated: var(--aura-neutral-850);        /* #111827 */
+  --bg-soft: var(--aura-neutral-800);            /* #161d2e */
+  --surface-default: var(--aura-neutral-850);
+  --surface-glass: rgba(17, 24, 39, 0.75);
+  --surface-hover: var(--aura-neutral-750);       /* #1c2538 */
+  --surface-active: var(--aura-neutral-700);      /* #242f46 */
+  --surface-input: #0f1623;
+
+  /* Typography */
+  --text-primary: var(--aura-neutral-100);       /* #f1f5f9 */
+  --text-secondary: var(--aura-neutral-400);     /* #94a3b8 */
+  --text-muted: var(--aura-neutral-500);         /* #64748b */
+  --text-inverse: var(--aura-neutral-900);
+
+  /* Borders & Dividers */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --border-accent: rgba(139, 92, 246, 0.35);
+  --focus-ring: rgba(139, 92, 246, 0.6);
+
+  /* Brand Accents */
+  --accent-primary: var(--aura-purple-500);      /* #8b5cf6 */
+  --accent-primary-hover: var(--aura-purple-600);/* #7c3aed */
+  --accent-primary-glow: rgba(139, 92, 246, 0.25);
+  --accent-premium: var(--aura-gold-500);        /* #f59e0b */
+  --accent-premium-hover: var(--aura-gold-600);  /* #d97706 */
+  --accent-premium-glow: rgba(245, 158, 11, 0.25);
+
+  /* Functional Feedback States */
+  --feedback-success-bg: rgba(16, 185, 129, 0.12);
+  --feedback-success-text: #34d399;
+  --feedback-success-border: rgba(16, 185, 129, 0.3);
+
+  --feedback-warning-bg: rgba(245, 158, 11, 0.12);
+  --feedback-warning-text: #fbbf24;
+  --feedback-warning-border: rgba(245, 158, 11, 0.3);
+
+  --feedback-danger-bg: rgba(244, 63, 94, 0.12);
+  --feedback-danger-text: #fb7185;
+  --feedback-danger-border: rgba(244, 63, 94, 0.3);
+
+  --feedback-info-bg: rgba(6, 182, 212, 0.12);
+  --feedback-info-text: #38bdf8;
+  --feedback-info-border: rgba(6, 182, 212, 0.3);
+
+  /* Elevation Shadows */
+  --aura-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.35);
+  --aura-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+  --aura-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+  --aura-shadow-glow: 0 0 20px rgba(139, 92, 246, 0.15);
+
+  /* Backward Compatibility Mapping */
+  --bg-base: var(--bg-primary);
+  --bg-surface: var(--bg-elevated);
+  --bg-card: var(--bg-soft);
+  --bg-card-hover: var(--surface-hover);
+  --bg-input: var(--surface-input);
+  --border: var(--border-subtle);
+  --accent: var(--accent-primary);
+  --accent-glow: var(--accent-primary-glow);
+  --accent-2: var(--aura-info-500);
+  --green: var(--aura-success-500);
+}
+
+/* =============================================================================
+   2. Light Theme: Daylight Precision
+   ============================================================================= */
+.light {
+  color-scheme: light;
+
+  /* Surfaces & Backgrounds */
+  --bg-primary: #f8fafc;                          /* Crisp canvas */
+  --bg-elevated: #ffffff;                         /* Pure white elevated cards */
+  --bg-soft: #f1f5f9;                             /* Soft neutral container */
+  --surface-default: #ffffff;
+  --surface-glass: rgba(255, 255, 255, 0.85);
+  --surface-hover: #f1f5f9;
+  --surface-active: #e2e8f0;
+  --surface-input: #ffffff;
+
+  /* Typography */
+  --text-primary: #0f172a;                        /* Slate 900 */
+  --text-secondary: #475569;                      /* Slate 600 */
+  --text-muted: #64748b;                          /* Slate 500 */
+  --text-inverse: #f8fafc;
+
+  /* Borders & Dividers */
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-strong: rgba(15, 23, 42, 0.16);
+  --border-accent: rgba(124, 58, 237, 0.4);
+  --focus-ring: rgba(124, 58, 237, 0.6);
+
+  /* Brand Accents */
+  --accent-primary: var(--aura-purple-600);       /* #7c3aed */
+  --accent-primary-hover: var(--aura-purple-700); /* #6d28d9 */
+  --accent-primary-glow: rgba(124, 58, 237, 0.15);
+  --accent-premium: var(--aura-gold-600);         /* #d97706 */
+  --accent-premium-hover: var(--aura-gold-700);   /* #b45309 */
+  --accent-premium-glow: rgba(217, 119, 6, 0.15);
+
+  /* Functional Feedback States */
+  --feedback-success-bg: #ecfdf5;
+  --feedback-success-text: #065f46;
+  --feedback-success-border: #a7f3d0;
+
+  --feedback-warning-bg: #fffbeb;
+  --feedback-warning-text: #92400e;
+  --feedback-warning-border: #fde68a;
+
+  --feedback-danger-bg: #fff1f2;
+  --feedback-danger-text: #9f1239;
+  --feedback-danger-border: #fecdd3;
+
+  --feedback-info-bg: #ecfeff;
+  --feedback-info-text: #155e75;
+  --feedback-info-border: #a5f3fc;
+
+  /* Elevation Shadows */
+  --aura-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --aura-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --aura-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --aura-shadow-glow: 0 0 15px rgba(124, 58, 237, 0.1);
+
+  /* Backward Compatibility Mapping */
+  --bg-base: var(--bg-primary);
+  --bg-surface: var(--bg-elevated);
+  --bg-card: var(--bg-elevated);
+  --bg-card-hover: var(--surface-hover);
+  --bg-input: var(--surface-input);
+  --border: var(--border-subtle);
+  --accent: var(--accent-primary);
+  --accent-glow: var(--accent-primary-glow);
+  --accent-2: #0284c7;
+  --green: #059669;
+}
+

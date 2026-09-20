@@ -1,0 +1,41 @@
+/**
+ * AuraOne Design System — Spacing and Layout Tokens
+ * Based on a strict 8px harmonic grid system.
+ */
+
+:root {
+  /* 8px Scale Grid */
+  --aura-space-0: 0px;
+  --aura-space-1: 4px;   /* 0.5x grid */
+  --aura-space-2: 8px;   /* 1x base */
+  --aura-space-3: 12px;  /* 1.5x */
+  --aura-space-4: 16px;  /* 2x */
+  --aura-space-5: 20px;  /* 2.5x */
+  --aura-space-6: 24px;  /* 3x */
+  --aura-space-8: 32px;  /* 4x */
+  --aura-space-10: 40px; /* 5x */
+  --aura-space-12: 48px; /* 6x */
+  --aura-space-16: 64px; /* 8x */
+  --aura-space-20: 80px; /* 10x */
+
+  /* Structural Layout Dimensions */
+  --aura-header-height: 64px;
+  --aura-sidebar-width: 260px;
+  --aura-sidebar-collapsed: 72px;
+  --aura-chat-max-width: 860px;
+  --aura-container-max-width: 1280px;
+  --aura-touch-target-min: 44px; /* WCAG 2.5.5 touch target minimum */
+
+  /* Layering & Z-Index Stacking Context */
+  --aura-z-base: 0;
+  --aura-z-sticky: 20;
+  --aura-z-header: 40;
+  --aura-z-sidebar: 45;
+  --aura-z-drawer: 50;
+  --aura-z-backdrop: 55;
+  --aura-z-modal: 60;
+  --aura-z-popover: 70;
+  --aura-z-tooltip: 80;
+  --aura-z-toast: 90;
+}
+

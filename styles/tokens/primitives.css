@@ -1,0 +1,92 @@
+/**
+ * AuraOne Design System — Primitive Tokens
+ * Base color scales, functional palettes, and structural geometry.
+ */
+
+:root {
+  /* ==========================================================================
+     1. Brand Palette: Royal Malay Purple Scale (Ungu Diraja)
+     ========================================================================== */
+  --aura-purple-50: #f5f3ff;
+  --aura-purple-100: #ede9fe;
+  --aura-purple-200: #ddd6fe;
+  --aura-purple-300: #c4b5fd;
+  --aura-purple-400: #a78bfa;
+  --aura-purple-500: #8b5cf6;
+  --aura-purple-600: #7c3aed; /* Primary Brand Accent */
+  --aura-purple-700: #6d28d9;
+  --aura-purple-800: #5b21b6;
+  --aura-purple-900: #4c1d95;
+  --aura-purple-950: #2e1065;
+
+  /* ==========================================================================
+     2. Brand Palette: Songket Gold Scale (Emas Songket Premium)
+     ========================================================================== */
+  --aura-gold-50: #fffbeb;
+  --aura-gold-100: #fef3c7;
+  --aura-gold-200: #fde68a;
+  --aura-gold-300: #fcd34d;
+  --aura-gold-400: #fbbf24;
+  --aura-gold-500: #f59e0b; /* Premium Accent */
+  --aura-gold-600: #d97706;
+  --aura-gold-700: #b45309;
+  --aura-gold-800: #92400e;
+  --aura-gold-900: #78350f;
+  --aura-gold-950: #451a03;
+
+  /* ==========================================================================
+     3. Neutral Scale: Dark Foundation (Slate / Midnight)
+     ========================================================================== */
+  --aura-neutral-950: #07090e; /* Deepest canvas */
+  --aura-neutral-900: #0b0f19; /* Standard base */
+  --aura-neutral-850: #111827; /* Elevated surface */
+  --aura-neutral-800: #161d2e; /* Card background */
+  --aura-neutral-750: #1c2538; /* Card hover */
+  --aura-neutral-700: #242f46; /* Subtle border */
+  --aura-neutral-600: #334155; /* Secondary border */
+  --aura-neutral-500: #64748b; /* Muted text */
+  --aura-neutral-400: #94a3b8; /* Secondary text */
+  --aura-neutral-300: #cbd5e1; /* Subtle text */
+  --aura-neutral-200: #e2e8f0; /* Crisp border in light */
+  --aura-neutral-100: #f1f5f9; /* Primary text in dark / surface in light */
+  --aura-neutral-50: #f8fafc;  /* Clean white-canvas */
+
+  /* ==========================================================================
+     4. Feedback Palettes (Semantic Functional)
+     ========================================================================== */
+  /* Success (Emerald) */
+  --aura-success-50: #ecfdf5;
+  --aura-success-500: #10b981;
+  --aura-success-600: #059669;
+  --aura-success-700: #047857;
+
+  /* Warning (Amber) */
+  --aura-warning-50: #fffbeb;
+  --aura-warning-500: #f59e0b;
+  --aura-warning-600: #d97706;
+  --aura-warning-700: #b45309;
+
+  /* Danger (Rose / Crimson) */
+  --aura-danger-50: #fff1f2;
+  --aura-danger-500: #f43f5e;
+  --aura-danger-600: #e11d48;
+  --aura-danger-700: #be123c;
+
+  /* Information (Cyan / Sky) */
+  --aura-info-50: #ecfeff;
+  --aura-info-500: #06b6d4;
+  --aura-info-600: #0891b2;
+  --aura-info-700: #0e7490;
+
+  /* ==========================================================================
+     5. Shape: Radius Geometry
+     ========================================================================== */
+  --aura-radius-xs: 4px;
+  --aura-radius-sm: 6px;
+  --aura-radius-md: 8px;
+  --aura-radius-lg: 12px;
+  --aura-radius-xl: 16px;
+  --aura-radius-2xl: 24px;
+  --aura-radius-full: 9999px;
+}
+
