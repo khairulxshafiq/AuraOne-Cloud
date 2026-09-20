@@ -4,7 +4,10 @@ import { AllowedAgent } from './security/validation';
  * Generates an intelligent Bahasa Melayu fallback response when the Hermes gateway is offline or unavailable.
  * Preserves 100% of the prototype conversational experience.
  */
-export function generateFallbackStream(message: string, agent: AllowedAgent): ReadableStream<Uint8Array> {
+export function generateFallbackStream(
+  message: string,
+  agent: AllowedAgent,
+): ReadableStream<Uint8Array> {
   const encoder = new TextEncoder();
 
   let reply = '';
@@ -66,4 +69,3 @@ export function generateFallbackStream(message: string, agent: AllowedAgent): Re
     },
   });
 }
-

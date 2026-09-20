@@ -15,7 +15,7 @@ export class MockHermesAdapter implements IHermesAdapter {
 
   async streamChat(
     request: HermesChatRequest,
-    options: HermesAdapterOptions
+    options: HermesAdapterOptions,
   ): Promise<ReadableStream<Uint8Array>> {
     this.lastRequest = request;
     this.lastOptions = options;
@@ -59,4 +59,3 @@ export class MockHermesAdapter implements IHermesAdapter {
     return !this.options.shouldFail;
   }
 }
-

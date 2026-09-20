@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useEffect, useState, useRef } from "react";
-import { supabase } from "@/lib/supabase";
-import { User } from "@supabase/supabase-js";
+import { useEffect, useState, useRef } from 'react';
+import { supabase } from '@/lib/supabase';
+import { User } from '@supabase/supabase-js';
 import {
   Send,
   Plus,
@@ -20,11 +20,11 @@ import {
   X,
   Radio,
   Video,
-} from "lucide-react";
+} from 'lucide-react';
 
 interface Message {
   id: string;
-  role: "user" | "assistant";
+  role: 'user' | 'assistant';
   content: string;
   timestamp: string;
 }
@@ -37,70 +37,70 @@ interface ChatSession {
 
 const AGENTS = [
   {
-    id: "Aura",
-    name: "Aura",
-    role: "Lead ReAct Orchestrator",
-    desc: "Pengurus keputusan & pembantu pintar serba boleh (BM-first).",
+    id: 'Aura',
+    name: 'Aura',
+    role: 'Lead ReAct Orchestrator',
+    desc: 'Pengurus keputusan & pembantu pintar serba boleh (BM-first).',
     icon: Zap,
-    color: "from-purple-500 to-indigo-600",
+    color: 'from-purple-500 to-indigo-600',
   },
   {
-    id: "Aura-Trade",
-    name: "Aura-Trade",
-    role: "Market Analyst",
-    desc: "Penganalisis sentimen Bursa Malaysia & pasaran kripto.",
+    id: 'Aura-Trade',
+    name: 'Aura-Trade',
+    role: 'Market Analyst',
+    desc: 'Penganalisis sentimen Bursa Malaysia & pasaran kripto.',
     icon: TrendingUp,
-    color: "from-emerald-500 to-teal-600",
+    color: 'from-emerald-500 to-teal-600',
   },
   {
-    id: "Aura-Pen",
-    name: "Aura-Pen",
-    role: "Content Director",
-    desc: "Pakar penulisan draf konten berimpak tinggi & naratif jenama Sakluma.",
+    id: 'Aura-Pen',
+    name: 'Aura-Pen',
+    role: 'Content Director',
+    desc: 'Pakar penulisan draf konten berimpak tinggi & naratif jenama Sakluma.',
     icon: Feather,
-    color: "from-amber-500 to-orange-600",
+    color: 'from-amber-500 to-orange-600',
   },
   {
-    id: "Aura-Art",
-    name: "Aura-Art",
-    role: "Visual Architect",
-    desc: "Penjana konsep visual & persona digital maya konsisten.",
+    id: 'Aura-Art',
+    name: 'Aura-Art',
+    role: 'Visual Architect',
+    desc: 'Penjana konsep visual & persona digital maya konsisten.',
     icon: Palette,
-    color: "from-pink-500 to-rose-600",
+    color: 'from-pink-500 to-rose-600',
   },
   {
-    id: "Aura-Scout",
-    name: "Aura-Scout",
-    role: "Radar & Intelligence",
-    desc: "Pengimbas berita, media sosial (YouTube/TikTok/X) & radar tren.",
+    id: 'Aura-Scout',
+    name: 'Aura-Scout',
+    role: 'Radar & Intelligence',
+    desc: 'Pengimbas berita, media sosial (YouTube/TikTok/X) & radar tren.',
     icon: Radio,
-    color: "from-cyan-500 to-blue-600",
+    color: 'from-cyan-500 to-blue-600',
   },
   {
-    id: "Aura-Vision",
-    name: "Aura-Vision",
-    role: "Video & Media Director",
-    desc: "Pengarah video Reels, motion graphics & pipeline visual AI.",
+    id: 'Aura-Vision',
+    name: 'Aura-Vision',
+    role: 'Video & Media Director',
+    desc: 'Pengarah video Reels, motion graphics & pipeline visual AI.',
     icon: Video,
-    color: "from-violet-500 to-fuchsia-600",
+    color: 'from-violet-500 to-fuchsia-600',
   },
 ];
 
 export default function CloudCockpit() {
   const [user, setUser] = useState<User | null>(null);
-  const [activeAgent, setActiveAgent] = useState("Aura");
+  const [activeAgent, setActiveAgent] = useState('Aura');
   const [sessions, setSessions] = useState<ChatSession[]>([
     {
-      id: "session-1",
-      title: "Perbualan Awal",
-      created_at: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      id: 'session-1',
+      title: 'Perbualan Awal',
+      created_at: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     },
   ]);
-  const [activeSessionId, setActiveSessionId] = useState<string>("session-1");
+  const [activeSessionId, setActiveSessionId] = useState<string>('session-1');
   const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   const [isStreaming, setIsStreaming] = useState(false);
-  const [credits, setCredits] = useState("10.00");
+  const [credits, setCredits] = useState('10.00');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -110,20 +110,20 @@ export default function CloudCockpit() {
   useEffect(() => {
     async function checkAuth() {
       try {
-        const { data: { session } } = await supabase.auth.getSession();
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
         setUser(session?.user ?? null);
       } catch (e) {
-        console.error("Error checking auth:", e);
+        console.error('Error checking auth:', e);
       }
     }
 
     checkAuth();
 
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setUser(session?.user ?? null);
-      }
-    );
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
 
     return () => {
       authListener.subscription.unsubscribe();
@@ -132,22 +132,22 @@ export default function CloudCockpit() {
 
   // Scroll to bottom when messages change
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isStreaming]);
 
   // Google OAuth Login
   const handleGoogleLogin = async () => {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
+        provider: 'google',
         options: {
-          redirectTo: typeof window !== "undefined" ? window.location.origin : undefined,
+          redirectTo: typeof window !== 'undefined' ? window.location.origin : undefined,
         },
       });
-      if (error) alert("Ralat log masuk Google: " + error.message);
+      if (error) alert('Ralat log masuk Google: ' + error.message);
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "Ralat tidak diketahui";
-      alert("Ralat log masuk: " + msg);
+      const msg = err instanceof Error ? err.message : 'Ralat tidak diketahui';
+      alert('Ralat log masuk: ' + msg);
     }
   };
 
@@ -164,7 +164,7 @@ export default function CloudCockpit() {
     const newSession: ChatSession = {
       id: newId,
       title: `Sesi Baru ${sessions.length + 1}`,
-      created_at: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      created_at: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
     setSessions([newSession, ...sessions]);
     setActiveSessionId(newId);
@@ -177,16 +177,16 @@ export default function CloudCockpit() {
     const text = (textToSend || input).trim();
     if (!text || isStreaming) return;
 
-    setInput("");
+    setInput('');
     if (textareaRef.current) {
-      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = 'auto';
     }
 
     const userMessage: Message = {
       id: `msg-${Date.now()}`,
-      role: "user",
+      role: 'user',
       content: text,
-      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
 
     setMessages((prev) => [...prev, userMessage]);
@@ -195,22 +195,24 @@ export default function CloudCockpit() {
     const assistantMsgId = `asst-${Date.now()}`;
     const assistantPlaceholder: Message = {
       id: assistantMsgId,
-      role: "assistant",
-      content: "",
-      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      role: 'assistant',
+      content: '',
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
 
     setMessages((prev) => [...prev, assistantPlaceholder]);
 
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      const headers: Record<string, string> = { "Content-Type": "application/json" };
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
       if (session?.access_token) {
-        headers["Authorization"] = `Bearer ${session.access_token}`;
+        headers['Authorization'] = `Bearer ${session.access_token}`;
       }
 
-      const res = await fetch("/api/chat", {
-        method: "POST",
+      const res = await fetch('/api/chat', {
+        method: 'POST',
         headers,
         body: JSON.stringify({
           message: text,
@@ -220,7 +222,7 @@ export default function CloudCockpit() {
       });
 
       if (!res.ok) {
-        let errMsg = "Gagal menyambung ke enjin perbualan AuraOne.";
+        let errMsg = 'Gagal menyambung ke enjin perbualan AuraOne.';
         try {
           const errData = await res.json();
           if (errData?.error?.message) {
@@ -228,41 +230,40 @@ export default function CloudCockpit() {
           }
         } catch {
           // Fallback to status-based error message
-          if (res.status === 401) errMsg = "Sesi log masuk telah tamat. Sila log masuk semula.";
-          else if (res.status === 429) errMsg = "Had permintaan telah dicapai. Sila tunggu sebentar.";
-          else if (res.status === 413) errMsg = "Mesej terlalu panjang untuk diproses.";
+          if (res.status === 401) errMsg = 'Sesi log masuk telah tamat. Sila log masuk semula.';
+          else if (res.status === 429)
+            errMsg = 'Had permintaan telah dicapai. Sila tunggu sebentar.';
+          else if (res.status === 413) errMsg = 'Mesej terlalu panjang untuk diproses.';
         }
         throw new Error(errMsg);
       }
 
       if (!res.body) {
-        throw new Error("Gagal menyambung ke enjin perbualan AuraOne.");
+        throw new Error('Gagal menyambung ke enjin perbualan AuraOne.');
       }
 
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
-      let accumulated = "";
+      let accumulated = '';
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
 
         const chunk = decoder.decode(value, { stream: true });
-        const lines = chunk.split("\n\n");
+        const lines = chunk.split('\n\n');
 
         for (const line of lines) {
-          if (line.startsWith("data: ")) {
-            const dataStr = line.replace("data: ", "").trim();
-            if (dataStr === "[DONE]") break;
+          if (line.startsWith('data: ')) {
+            const dataStr = line.replace('data: ', '').trim();
+            if (dataStr === '[DONE]') break;
 
             try {
               const parsed = JSON.parse(dataStr);
               if (parsed.text) {
                 accumulated += parsed.text;
                 setMessages((prev) =>
-                  prev.map((m) =>
-                    m.id === assistantMsgId ? { ...m, content: accumulated } : m
-                  )
+                  prev.map((m) => (m.id === assistantMsgId ? { ...m, content: accumulated } : m)),
                 );
               }
             } catch {
@@ -278,13 +279,11 @@ export default function CloudCockpit() {
         return val.toFixed(2);
       });
     } catch (err: unknown) {
-      const errorMsg = err instanceof Error ? err.message : "Ralat tidak diketahui";
+      const errorMsg = err instanceof Error ? err.message : 'Ralat tidak diketahui';
       setMessages((prev) =>
         prev.map((m) =>
-          m.id === assistantMsgId
-            ? { ...m, content: `⚠ Maaf, berlaku ralat: ${errorMsg}` }
-            : m
-        )
+          m.id === assistantMsgId ? { ...m, content: `⚠ Maaf, berlaku ralat: ${errorMsg}` } : m,
+        ),
       );
     } finally {
       setIsStreaming(false);
@@ -293,7 +292,7 @@ export default function CloudCockpit() {
 
   // Handle textarea auto-resize
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
     }
@@ -301,7 +300,7 @@ export default function CloudCockpit() {
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInput(e.target.value);
-    e.target.style.height = "auto";
+    e.target.style.height = 'auto';
     e.target.style.height = `${Math.min(e.target.scrollHeight, 160)}px`;
   };
 
@@ -312,7 +311,7 @@ export default function CloudCockpit() {
       {/* ────────────────────────────────────────────────────────── */}
       <aside
         className={`fixed inset-y-0 left-0 z-40 w-72 bg-[#111827] border-r border-white/10 flex flex-col transition-transform duration-300 md:static md:translate-x-0 ${
-          mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+          mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         {/* Brand Header */}
@@ -323,7 +322,10 @@ export default function CloudCockpit() {
             </div>
             <div>
               <h1 className="font-bold text-sm tracking-tight flex items-center gap-1.5">
-                AuraOne <span className="text-purple-400 text-xs font-mono px-1.5 py-0.5 rounded bg-purple-500/10 border border-purple-500/20">Cloud</span>
+                AuraOne{' '}
+                <span className="text-purple-400 text-xs font-mono px-1.5 py-0.5 rounded bg-purple-500/10 border border-purple-500/20">
+                  Cloud
+                </span>
               </h1>
               <p className="text-[11px] text-zinc-400 font-mono">BM-First Agent OS</p>
             </div>
@@ -362,8 +364,8 @@ export default function CloudCockpit() {
                   onClick={() => setActiveAgent(agent.id)}
                   className={`w-full flex items-center gap-2.5 p-2 rounded-xl text-left transition-all ${
                     isActive
-                      ? "bg-purple-500/15 border border-purple-500/30 text-white"
-                      : "hover:bg-white/5 border border-transparent text-zinc-400"
+                      ? 'bg-purple-500/15 border border-purple-500/30 text-white'
+                      : 'hover:bg-white/5 border border-transparent text-zinc-400'
                   }`}
                 >
                   <div
@@ -401,8 +403,8 @@ export default function CloudCockpit() {
                 }}
                 className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs transition-colors text-left ${
                   activeSessionId === s.id
-                    ? "bg-white/10 text-white font-medium"
-                    : "text-zinc-400 hover:bg-white/5 hover:text-zinc-200"
+                    ? 'bg-white/10 text-white font-medium'
+                    : 'text-zinc-400 hover:bg-white/5 hover:text-zinc-200'
                 }`}
               >
                 <MessageSquare className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
@@ -421,9 +423,7 @@ export default function CloudCockpit() {
               <Coins className="w-4 h-4 text-amber-400" />
               <span className="font-mono">Baki PAYG</span>
             </div>
-            <span className="font-mono font-bold text-emerald-400">
-              RM {credits}
-            </span>
+            <span className="font-mono font-bold text-emerald-400">RM {credits}</span>
           </div>
 
           {/* User Account */}
@@ -431,11 +431,11 @@ export default function CloudCockpit() {
             <div className="flex items-center justify-between p-1.5">
               <div className="flex items-center gap-2 min-w-0">
                 <div className="w-7 h-7 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 flex items-center justify-center font-bold text-xs text-white uppercase shrink-0">
-                  {user.email ? user.email[0] : "U"}
+                  {user.email ? user.email[0] : 'U'}
                 </div>
                 <div className="min-w-0">
                   <p className="text-xs font-medium text-zinc-200 truncate">
-                    {user.user_metadata?.full_name || user.email?.split("@")[0]}
+                    {user.user_metadata?.full_name || user.email?.split('@')[0]}
                   </p>
                   <p className="text-[10px] text-zinc-500 truncate">{user.email}</p>
                 </div>
@@ -508,9 +508,7 @@ export default function CloudCockpit() {
             </div>
 
             {user && (
-              <span className="text-xs text-zinc-400 font-mono hidden md:inline">
-                {user.email}
-              </span>
+              <span className="text-xs text-zinc-400 font-mono hidden md:inline">{user.email}</span>
             )}
           </div>
         </header>
@@ -522,18 +520,17 @@ export default function CloudCockpit() {
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-600/30 to-cyan-500/20 border border-purple-500/30 flex items-center justify-center mb-5 shadow-2xl shadow-purple-500/20">
                 <Bot className="w-8 h-8 text-purple-400" />
               </div>
-              <h3 className="text-xl font-bold text-zinc-100 mb-2">
-                AuraOne Cloud (Beta v1)
-              </h3>
+              <h3 className="text-xl font-bold text-zinc-100 mb-2">AuraOne Cloud (Beta v1)</h3>
               <p className="text-sm text-zinc-400 mb-6 leading-relaxed">
-                Antaramuka perbualan multi-ejen beridentiti Malaysia. Sila taip sebarang soalan atau pilih cadangan tindakan pantas di bawah.
+                Antaramuka perbualan multi-ejen beridentiti Malaysia. Sila taip sebarang soalan atau
+                pilih cadangan tindakan pantas di bawah.
               </p>
 
               {/* Suggestions */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full">
                 <button
                   onClick={() =>
-                    handleSendMessage("Bantu saya analisa strategi pasaran saham hari ini.")
+                    handleSendMessage('Bantu saya analisa strategi pasaran saham hari ini.')
                   }
                   className="p-3 rounded-xl bg-[#161D2E] hover:bg-[#1C2538] border border-white/5 text-left text-xs text-zinc-300 transition-all hover:border-purple-500/30"
                 >
@@ -545,7 +542,9 @@ export default function CloudCockpit() {
 
                 <button
                   onClick={() =>
-                    handleSendMessage("Tuliskan copywriting Facebook untuk produk Daging Salai Sakluma.")
+                    handleSendMessage(
+                      'Tuliskan copywriting Facebook untuk produk Daging Salai Sakluma.',
+                    )
                   }
                   className="p-3 rounded-xl bg-[#161D2E] hover:bg-[#1C2538] border border-white/5 text-left text-xs text-zinc-300 transition-all hover:border-purple-500/30"
                 >
@@ -557,7 +556,7 @@ export default function CloudCockpit() {
 
                 <button
                   onClick={() =>
-                    handleSendMessage("Bagaimanakah sistem kredit PAYG AuraOne berfungsi?")
+                    handleSendMessage('Bagaimanakah sistem kredit PAYG AuraOne berfungsi?')
                   }
                   className="p-3 rounded-xl bg-[#161D2E] hover:bg-[#1C2538] border border-white/5 text-left text-xs text-zinc-300 transition-all hover:border-purple-500/30"
                 >
@@ -569,7 +568,7 @@ export default function CloudCockpit() {
 
                 <button
                   onClick={() =>
-                    handleSendMessage("Boleh cadangkan idea kempen visual persona digital Maya?")
+                    handleSendMessage('Boleh cadangkan idea kempen visual persona digital Maya?')
                   }
                   className="p-3 rounded-xl bg-[#161D2E] hover:bg-[#1C2538] border border-white/5 text-left text-xs text-zinc-300 transition-all hover:border-purple-500/30"
                 >
@@ -585,18 +584,18 @@ export default function CloudCockpit() {
               <div
                 key={msg.id}
                 className={`flex gap-3 max-w-3xl ${
-                  msg.role === "user" ? "ml-auto flex-row-reverse" : "mr-auto"
+                  msg.role === 'user' ? 'ml-auto flex-row-reverse' : 'mr-auto'
                 }`}
               >
                 {/* Avatar */}
                 <div
                   className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 shadow-md ${
-                    msg.role === "user"
-                      ? "bg-purple-600 text-white"
-                      : "bg-[#161D2E] border border-purple-500/30 text-purple-400"
+                    msg.role === 'user'
+                      ? 'bg-purple-600 text-white'
+                      : 'bg-[#161D2E] border border-purple-500/30 text-purple-400'
                   }`}
                 >
-                  {msg.role === "user" ? (
+                  {msg.role === 'user' ? (
                     <span className="text-xs font-bold">👤</span>
                   ) : (
                     <Zap className="w-4 h-4 text-purple-400" />
@@ -606,18 +605,16 @@ export default function CloudCockpit() {
                 {/* Bubble */}
                 <div
                   className={`rounded-2xl px-4 py-3 text-sm leading-relaxed ${
-                    msg.role === "user"
-                      ? "bg-purple-600 text-white rounded-tr-none"
-                      : "bg-[#161D2E] border border-white/10 text-zinc-200 rounded-tl-none shadow-sm"
+                    msg.role === 'user'
+                      ? 'bg-purple-600 text-white rounded-tr-none'
+                      : 'bg-[#161D2E] border border-white/10 text-zinc-200 rounded-tl-none shadow-sm'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-4 mb-1">
                     <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-zinc-400">
-                      {msg.role === "user" ? "Anda" : `${activeAgent} · AuraOne`}
+                      {msg.role === 'user' ? 'Anda' : `${activeAgent} · AuraOne`}
                     </span>
-                    <span className="text-[10px] text-zinc-500 font-mono">
-                      {msg.timestamp}
-                    </span>
+                    <span className="text-[10px] text-zinc-500 font-mono">{msg.timestamp}</span>
                   </div>
                   <div className="whitespace-pre-wrap font-sans">
                     {msg.content || (

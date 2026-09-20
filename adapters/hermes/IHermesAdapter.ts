@@ -13,8 +13,7 @@ export interface HermesAdapterOptions {
 export interface IHermesAdapter {
   streamChat(
     request: HermesChatRequest,
-    options: HermesAdapterOptions
+    options: HermesAdapterOptions,
   ): Promise<ReadableStream<Uint8Array>>;
   healthCheck(): Promise<boolean>;
 }
-
