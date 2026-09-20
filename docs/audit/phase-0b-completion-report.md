@@ -98,3 +98,4 @@ AuraOne Cloud is currently an **inspiring, functional proof-of-concept (POC)**. 
 > [!IMPORTANT]
 > **STOP — Phase 0B is complete.**  
 > In accordance with project governance (`00_READ_ME_FIRST.md` & `06_AURAONE_DECISIONS_LOG.md: DEC-012`), execution has halted. Phase 0C (Architecture Baseline) and Phase 1 (Engineering Foundation) will not begin until explicit founder approval is granted.
+
