@@ -162,7 +162,13 @@ dependency audit
 
 ---
 
-# Phase 2: Design System and Application Shell
+# Phase 1C: Design System and Application Shell
+
+**NOTE NUMBERING:** Dokumen 01_AURAONE_PROJECT_INPUT.md guna fasa
+produk (Phase 2 = Private Alpha). Untuk elak konflik nombor, fasa
+Design System & Shell ini dirujuk sebagai **Phase 1C** dalam semua
+arahan operasi. Numbering di bawah kekal 2 kerana ini urutan build
+DALAM foundation, bukan fasa produk.
 
 ## Objective
 

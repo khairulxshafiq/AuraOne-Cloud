@@ -2,7 +2,9 @@
 
 # AuraOne Brand Voice and Product Copy Guide
 
-Version: 1.0  
+Version: 1.1
+Status: CANONICAL copy guide untuk AuraOne Cloud dan semua landing page.
+Struktur dia permanen; tukaran kecil ditanda "v1.1 Fix" bawah.  
 Primary language: Bahasa Melayu  
 Secondary language: English
 
@@ -445,3 +447,26 @@ Before shipping copy, verify:
 - [ ] Sesuai untuk skrin kecil
 - [ ] Error membantu pengguna
 
+
+
+---
+
+# 19. v1.1 Improvement Notes (20Sep)
+
+Perubahan oleh AuraOne (DevOps audit):
+
+- **BM conventions:** Nama produk/AuraOne, Brand "AuraOne by Norliv
+  Labs" — guna ejaan standard Malaysia, tiada penatah British en-GB.
+- **CTA "Bina Bot" vs "Cipta Bot"**: gunakan SATU je sepanjang UI —
+  pilih "Bina Bot" (lebih BM-natural). Kedua-dua tak boleh muncul
+  serentak dalam sesi yang sama.
+- **Error + correlation id**: format Rujukan: `abc-123` cukup, TAPI
+  jangan paparkan correlation ID kalau itu internal/UUID raw — mask
+  dulu 6-char pertama sahaja.
+- **Awak / Anda**: pilih AWAK untuk landing + chat santai fnDefault;
+  "anda" kekalkan untuk Billing, Admin, Security contexts (formal).
+- **Anti-dark-pattern** telah jadi hard rule (Amira = trade copy pun
+  no guaranteed-return language).
+- Bahasa figure tidak digunakan untuk label UI-control (button,
+  nav, input label) — BM je. English figure hanya untuk body copy
+  teknikal.

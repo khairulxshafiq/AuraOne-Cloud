@@ -2,8 +2,11 @@
 
 # AuraOne Cloud Master Product and Engineering Blueprint
 
-Version: 1.0  
-Status: Approved Direction
+Version: 1.1  
+Status: Approved Direction  
+Note: Struktur folder (apps/web/src/...) adalah RECOMMENDED — repositori
+semasa guna flat Next.js (app/, lib/, tests/). Tukar ke monorepo jika
+ada logic sebenar utk multi-package, jangan refactor untuk estetika.
 
 ---
 
