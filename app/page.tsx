@@ -88,9 +88,14 @@ const AGENTS = [
 
 export default function CloudCockpit() {
   const [user, setUser] = useState<User | null>(null);
-  const [authLoading, setAuthLoading] = useState(true);
   const [activeAgent, setActiveAgent] = useState("Aura");
-  const [sessions, setSessions] = useState<ChatSession[]>([]);
+  const [sessions, setSessions] = useState<ChatSession[]>([
+    {
+      id: "session-1",
+      title: "Perbualan Awal",
+      created_at: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+    },
+  ]);
   const [activeSessionId, setActiveSessionId] = useState<string>("session-1");
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -109,8 +114,6 @@ export default function CloudCockpit() {
         setUser(session?.user ?? null);
       } catch (e) {
         console.error("Error checking auth:", e);
-      } finally {
-        setAuthLoading(false);
       }
     }
 
@@ -119,7 +122,6 @@ export default function CloudCockpit() {
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setUser(session?.user ?? null);
-        setAuthLoading(false);
       }
     );
 
@@ -127,19 +129,6 @@ export default function CloudCockpit() {
       authListener.subscription.unsubscribe();
     };
   }, []);
-
-  // Initial welcome message or local session memory
-  useEffect(() => {
-    if (sessions.length === 0) {
-      const initialSession: ChatSession = {
-        id: "session-1",
-        title: "Perbualan Awal",
-        created_at: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-      };
-      setSessions([initialSession]);
-      setActiveSessionId(initialSession.id);
-    }
-  }, [sessions.length]);
 
   // Scroll to bottom when messages change
   useEffect(() => {
@@ -214,9 +203,15 @@ export default function CloudCockpit() {
     setMessages((prev) => [...prev, assistantPlaceholder]);
 
     try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const headers: Record<string, string> = { "Content-Type": "application/json" };
+      if (session?.access_token) {
+        headers["Authorization"] = `Bearer ${session.access_token}`;
+      }
+
       const res = await fetch("/api/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers,
         body: JSON.stringify({
           message: text,
           sessionId: activeSessionId,
@@ -224,7 +219,23 @@ export default function CloudCockpit() {
         }),
       });
 
-      if (!res.ok || !res.body) {
+      if (!res.ok) {
+        let errMsg = "Gagal menyambung ke enjin perbualan AuraOne.";
+        try {
+          const errData = await res.json();
+          if (errData?.error?.message) {
+            errMsg = errData.error.message;
+          }
+        } catch {
+          // Fallback to status-based error message
+          if (res.status === 401) errMsg = "Sesi log masuk telah tamat. Sila log masuk semula.";
+          else if (res.status === 429) errMsg = "Had permintaan telah dicapai. Sila tunggu sebentar.";
+          else if (res.status === 413) errMsg = "Mesej terlalu panjang untuk diproses.";
+        }
+        throw new Error(errMsg);
+      }
+
+      if (!res.body) {
         throw new Error("Gagal menyambung ke enjin perbualan AuraOne.");
       }
 
