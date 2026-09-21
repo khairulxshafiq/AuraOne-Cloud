@@ -2,39 +2,41 @@
 
 ## 1. Token Structure
 AuraOne tokens are partitioned into logical CSS files located in `styles/tokens/`:
-- `styles/tokens/primitives.css`: Raw color palettes, base radii, shadows, z-indices.
-- `styles/tokens/themes.css`: Semantic mappings for light and dark modes (`--color-bg-canvas`, `--color-fg-default`, `--color-border-subtle`, etc.).
+- `styles/tokens/primitives.css`: Raw color palettes (Royal Malay Purple, Songket Gold, slate neutrals, semantic feedback scales), base radii, shadows, z-indices.
+- `styles/tokens/themes.css`: Semantic mappings for light and dark modes (`--bg-primary`, `--bg-elevated`, `--text-primary`, `--border-subtle`, `--accent-primary`, etc.).
 - `styles/tokens/spacing.css`: 8px-based spatial system (`--spacing-1` = 4px, `--spacing-2` = 8px ... `--spacing-16` = 64px).
-- `styles/tokens/typography.css`: Type scale (`--font-size-xs` to `--font-size-4xl`), font families, font weights, and line heights.
-- `styles/tokens/motion.css`: Durations (`--duration-fast`, `--duration-normal`, `--duration-slow`) and easings (`--ease-standard`, `--ease-in-out`).
+- `styles/tokens/typography.css`: Type scale (`--font-size-xs` to `--font-size-4xl`), font families (`--aura-font-sans`, `--aura-font-mono`), font weights, and line heights.
+- `styles/tokens/motion.css`: Durations (`--aura-duration-fast`, `--aura-duration-normal`, `--aura-duration-slow`) and easings (`--aura-ease-default`, `--aura-ease-in-out`).
 
 ## 2. Color Palette & Cues
-- **Primary Brand**: Royal Malay Purple (`#6A1B9A` / `rgb(106, 27, 154)`)
-- **Accent**: Songket Gold (`#C89B3C` / `rgb(200, 155, 60)`)
-- **Success**: Emerald Green (`#059669`)
-- **Warning**: Amber (`#D97706`)
-- **Danger**: Ruby Crimson (`#DC2626`)
-- **Info**: Sapphire Blue (`#2563EB`)
+- **Primary Brand**: Royal Malay Purple (`--aura-purple-600` / `#7c3aed`, `--accent-primary`)
+- **Accent**: Songket Gold (`--aura-gold-500` / `#f59e0b`, `--accent-premium`)
+- **Success**: Emerald Green (`--aura-success-500` / `#10b981`)
+- **Warning**: Amber (`--aura-warning-500` / `#f59e0b`)
+- **Danger**: Ruby Crimson / Rose (`--aura-danger-500` / `#f43f5e`)
+- **Info**: Sapphire / Cyan (`--aura-info-500` / `#06b6d4`)
 
 ## 3. Contrast Ratios & WCAG 2.1 AA Compliance
 | Semantic Token | Light Mode Value | Dark Mode Value | Context / Contrast |
 | :--- | :--- | :--- | :--- |
-| `--color-bg-canvas` | `#FAFAFB` | `#0D0D12` | Root page background |
-| `--color-bg-surface` | `#FFFFFF` | `#16161F` | Card & container surface |
-| `--color-fg-default` | `#111827` | `#F9FAFB` | Primary body text (>= 12:1 ratio) |
-| `--color-fg-muted` | `#4B5563` | `#9CA3AF` | Secondary text (>= 4.5:1 ratio) |
-| `--color-border-default` | `#D1D5DB` | `#2D2D3D` | Interactive element borders (>= 3:1) |
-| `--color-brand-primary` | `#6A1B9A` | `#9C27B0` | Brand CTA, focus rings |
+| `--bg-primary` | `#f8fafc` (Slate 50) | `#0b0f19` (Neutral 900) | Root page background |
+| `--bg-elevated` | `#ffffff` (Pure White) | `#111827` (Neutral 850) | Card & container surface |
+| `--text-primary` | `#0f172a` (Slate 900) | `#f1f5f9` (Neutral 100) | Primary body text (>= 12:1 ratio) |
+| `--text-secondary` | `#475569` (Slate 600) | `#94a3b8` (Neutral 400) | Secondary text (>= 4.5:1 ratio) |
+| `--border-subtle` | `rgba(15, 23, 42, 0.08)` | `rgba(255, 255, 255, 0.08)` | Subtle container borders |
+| `--border-strong` | `rgba(15, 23, 42, 0.16)` | `rgba(255, 255, 255, 0.16)` | Interactive element borders (>= 3:1) |
+| `--accent-primary` | `#7c3aed` (Purple 600) | `#8b5cf6` (Purple 500) | Brand CTA, focus rings |
 
 ## 4. Usage Guidelines
 Direct hex codes and arbitrary Tailwind numbers (e.g. `bg-zinc-900`, `text-gray-100`) are deprecated in favor of semantic CSS variable classes or token properties.
 Example:
 ```css
 .card {
-  background-color: var(--color-bg-surface);
-  color: var(--color-fg-default);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-lg);
+  background-color: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--aura-radius-lg);
   padding: var(--spacing-4);
 }
 ```
+

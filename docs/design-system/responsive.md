@@ -24,3 +24,4 @@ The AuraOne layout system utilizes modern responsive breakpoints aligned with mo
 - Header renders a hamburger menu button toggling `MobileDrawer`.
 - Chat interface input floats fixed at bottom with viewport compensation for mobile virtual keyboards.
 - Touch target minimum: `44px x 44px` for all interactive elements (WCAG 2.5.5).
+

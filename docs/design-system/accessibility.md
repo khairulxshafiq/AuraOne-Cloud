@@ -28,3 +28,4 @@ AuraOne Cloud targets strict **WCAG 2.1 Level AA** compliance across all user-fa
 
 ### 2.6 Form Labels and Descriptions (WCAG 3.3.2)
 - All inputs (`Input`, `Textarea`) mandate explicit `id`, `label`, and support `aria-describedby` for validation and error messages (`role="alert"`).
+

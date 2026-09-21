@@ -38,3 +38,4 @@ All components adhere to strict layer separation:
 - `AppShell`: Authenticated wrapper binding Header, Sidebar, Drawer, and Main content area.
 - `PublicShell`: Minimal public layout for unauthenticated or landing views.
 - `ThemeToggle`: 3-state radio-like toggle for light, dark, and system themes.
+

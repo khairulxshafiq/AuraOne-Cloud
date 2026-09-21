@@ -28,7 +28,7 @@ The core anti-FOUC mechanism is defined in `lib/theme/theme-script.ts` and rende
 <head>
   <script
     dangerouslySetInnerHTML={{
-      __html: THEME_INIT_SCRIPT,
+      __html: themeInitScript,
     }}
   />
 </head>
@@ -49,3 +49,4 @@ export function MyComponent() {
 
 ## 5. UI Control (`ThemeToggle`)
 The `ThemeToggle` component (`components/layout/ThemeToggle.tsx`) offers a 3-way toggle (Terang, Gelap, Sistem) with full ARIA attributes, keyboard support, and Malaysian Bahasa labels.
+

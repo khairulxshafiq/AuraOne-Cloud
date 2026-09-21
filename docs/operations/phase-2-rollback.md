@@ -1,7 +1,7 @@
 # Phase 2 Rollback Strategy & Runbook
 
 ## 1. Scope of Rollback
-In the event that Phase 2 introduces unforeseen regressions in production or staging, the entire change set is isolated within branch `phase/2-design-system-app-shell` and pull request #3.
+In the event that Phase 2 introduces unforeseen regressions in production or staging, the entire change set is isolated within branch `phase/2-design-system-app-shell` and pull request #4.
 
 ## 2. Fast Rollback Procedure
 If the pull request is merged into `main` and needs immediate reversal:
@@ -25,3 +25,4 @@ If the pull request is merged into `main` and needs immediate reversal:
 ## 3. Component-Level Fallback
 - If `ThemeProvider` encounters hydration conflicts in non-standard user browsers, `lib/theme/ThemeContext.tsx` safely falls back to `'dark'` theme without crashing.
 - If CSS variables fail to resolve, default CSS fallbacks ensure readability.
+
