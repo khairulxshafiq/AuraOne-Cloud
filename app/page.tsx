@@ -21,6 +21,10 @@ import {
   Radio,
   Video,
 } from 'lucide-react';
+import { ThemeToggle } from '@/components/layout/ThemeToggle';
+import { SkipLink } from '@/components/layout/SkipLink';
+import { Badge } from '@/components/ui/Badge';
+import { Avatar } from '@/components/ui/Avatar';
 
 interface Message {
   id: string;
@@ -118,44 +122,42 @@ export default function CloudCockpit() {
         console.error('Error checking auth:', e);
       }
     }
-
     checkAuth();
 
-    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
     });
 
-    return () => {
-      authListener.subscription.unsubscribe();
-    };
+    return () => subscription.unsubscribe();
   }, []);
 
-  // Scroll to bottom when messages change
+  // Auto-scroll on new message chunks
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isStreaming]);
 
-  // Google OAuth Login
+  // Handle Google OAuth Login
   const handleGoogleLogin = async () => {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: typeof window !== 'undefined' ? window.location.origin : undefined,
+          redirectTo: typeof window !== 'undefined' ? `${window.location.origin}` : undefined,
         },
       });
-      if (error) alert('Ralat log masuk Google: ' + error.message);
+      if (error) throw error;
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Ralat tidak diketahui';
-      alert('Ralat log masuk: ' + msg);
+      const errorMsg = err instanceof Error ? err.message : 'Gagal log masuk Google';
+      alert(`Ralat log masuk: ${errorMsg}`);
     }
   };
 
-  // Logout
+  // Handle Logout
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setUser(null);
-    setMessages([]);
   };
 
   // Create new session
@@ -163,36 +165,38 @@ export default function CloudCockpit() {
     const newId = `session-${Date.now()}`;
     const newSession: ChatSession = {
       id: newId,
-      title: `Sesi Baru ${sessions.length + 1}`,
+      title: 'Perbualan Baru',
       created_at: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
-    setSessions([newSession, ...sessions]);
+    setSessions((prev) => [newSession, ...prev]);
     setActiveSessionId(newId);
     setMessages([]);
     setMobileMenuOpen(false);
   };
 
-  // Send Message & Stream Response
-  const handleSendMessage = async (textToSend?: string) => {
-    const text = (textToSend || input).trim();
+  // Send message to Secure Next.js Chat API
+  const handleSendMessage = async (customText?: string) => {
+    const text = (customText ?? input).trim();
     if (!text || isStreaming) return;
 
-    setInput('');
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
+    if (!customText) {
+      setInput('');
+      if (textareaRef.current) {
+        textareaRef.current.style.height = 'auto';
+      }
     }
 
-    const userMessage: Message = {
-      id: `msg-${Date.now()}`,
+    const userMsg: Message = {
+      id: `msg-${Date.now()}-u`,
       role: 'user',
       content: text,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMsg]);
     setIsStreaming(true);
 
-    const assistantMsgId = `asst-${Date.now()}`;
+    const assistantMsgId = `msg-${Date.now()}-a`;
     const assistantPlaceholder: Message = {
       id: assistantMsgId,
       role: 'assistant',
@@ -305,34 +309,39 @@ export default function CloudCockpit() {
   };
 
   return (
-    <div className="flex h-screen w-full bg-[#0B0F19] text-[#F1F5F9] overflow-hidden font-sans">
+    <div className="flex h-screen w-full bg-[var(--bg-primary)] text-[var(--text-primary)] overflow-hidden font-sans">
+      <SkipLink targetId="chat-main-content" />
+
       {/* ────────────────────────────────────────────────────────── */}
       {/* SIDEBAR (DESKTOP & MOBILE DRAWER) */}
       {/* ────────────────────────────────────────────────────────── */}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 w-72 bg-[#111827] border-r border-white/10 flex flex-col transition-transform duration-300 md:static md:translate-x-0 ${
+        aria-label="Navigasi Sisi"
+        className={`fixed inset-y-0 left-0 z-[var(--aura-z-drawer)] w-72 bg-[var(--bg-elevated)] border-r border-[var(--border-subtle)] flex flex-col transition-transform duration-300 md:static md:translate-x-0 ${
           mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         {/* Brand Header */}
-        <div className="p-4 border-b border-white/10 flex items-center justify-between">
+        <div className="p-4 border-b border-[var(--border-subtle)] flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-purple-500/25">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[var(--aura-purple-600)] to-[var(--aura-info-500)] flex items-center justify-center shadow-lg shadow-[var(--accent-primary-glow)]">
               <Sparkles className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h1 className="font-bold text-sm tracking-tight flex items-center gap-1.5">
+              <h1 className="font-bold text-sm tracking-tight flex items-center gap-1.5 text-[var(--text-primary)]">
                 AuraOne{' '}
-                <span className="text-purple-400 text-xs font-mono px-1.5 py-0.5 rounded bg-purple-500/10 border border-purple-500/20">
+                <Badge variant="primary" size="sm">
                   Cloud
-                </span>
+                </Badge>
               </h1>
-              <p className="text-[11px] text-zinc-400 font-mono">BM-First Agent OS</p>
+              <p className="text-[11px] text-[var(--text-muted)] font-mono">BM-First Agent OS</p>
             </div>
           </div>
           <button
+            type="button"
             onClick={() => setMobileMenuOpen(false)}
-            className="md:hidden p-1.5 rounded-lg text-zinc-400 hover:text-white"
+            aria-label="Tutup menu navigasi"
+            className="md:hidden p-1.5 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)]"
           >
             <X className="w-5 h-5" />
           </button>
@@ -341,8 +350,9 @@ export default function CloudCockpit() {
         {/* Action: New Chat */}
         <div className="p-3">
           <button
+            type="button"
             onClick={handleNewChat}
-            className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-md shadow-purple-600/30 transition-all active:scale-[0.98]"
+            className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] text-white text-xs font-semibold shadow-md shadow-[var(--accent-primary-glow)] transition-all active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-primary)]"
           >
             <Plus className="w-4 h-4" />
             Sesi Perbualan Baru
@@ -351,7 +361,7 @@ export default function CloudCockpit() {
 
         {/* Agent Persona Selector */}
         <div className="px-3 py-2">
-          <p className="text-[10px] font-mono tracking-wider uppercase text-zinc-500 mb-2 px-1">
+          <p className="text-[10px] font-mono tracking-wider uppercase text-[var(--text-muted)] mb-2 px-1">
             Armada Ejen (Select Agent)
           </p>
           <div className="space-y-1">
@@ -360,12 +370,13 @@ export default function CloudCockpit() {
               const isActive = activeAgent === agent.id;
               return (
                 <button
+                  type="button"
                   key={agent.id}
                   onClick={() => setActiveAgent(agent.id)}
                   className={`w-full flex items-center gap-2.5 p-2 rounded-xl text-left transition-all ${
                     isActive
-                      ? 'bg-purple-500/15 border border-purple-500/30 text-white'
-                      : 'hover:bg-white/5 border border-transparent text-zinc-400'
+                      ? 'bg-[var(--accent-primary)]/15 border border-[var(--border-accent)] text-[var(--text-primary)]'
+                      : 'hover:bg-[var(--surface-hover)] border border-transparent text-[var(--text-secondary)]'
                   }`}
                 >
                   <div
@@ -374,13 +385,13 @@ export default function CloudCockpit() {
                     <Icon className="w-4 h-4 text-white" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-semibold text-zinc-200 truncate flex items-center justify-between">
+                    <p className="text-xs font-semibold text-[var(--text-primary)] truncate flex items-center justify-between">
                       {agent.name}
                       {isActive && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--aura-success-500)] shadow-[0_0_6px_var(--aura-success-500)]" />
                       )}
                     </p>
-                    <p className="text-[10px] text-zinc-500 truncate">{agent.role}</p>
+                    <p className="text-[10px] text-[var(--text-muted)] truncate">{agent.role}</p>
                   </div>
                 </button>
               );
@@ -390,12 +401,13 @@ export default function CloudCockpit() {
 
         {/* Previous Chat Sessions */}
         <div className="flex-1 overflow-y-auto px-3 py-2">
-          <p className="text-[10px] font-mono tracking-wider uppercase text-zinc-500 mb-2 px-1">
+          <p className="text-[10px] font-mono tracking-wider uppercase text-[var(--text-muted)] mb-2 px-1">
             Sejarah Sesi (Sessions)
           </p>
           <div className="space-y-1">
             {sessions.map((s) => (
               <button
+                type="button"
                 key={s.id}
                 onClick={() => {
                   setActiveSessionId(s.id);
@@ -403,57 +415,60 @@ export default function CloudCockpit() {
                 }}
                 className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs transition-colors text-left ${
                   activeSessionId === s.id
-                    ? 'bg-white/10 text-white font-medium'
-                    : 'text-zinc-400 hover:bg-white/5 hover:text-zinc-200'
+                    ? 'bg-[var(--surface-hover)] text-[var(--text-primary)] font-medium border border-[var(--border-subtle)]'
+                    : 'text-[var(--text-secondary)] hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)]'
                 }`}
               >
-                <MessageSquare className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+                <MessageSquare className="w-3.5 h-3.5 text-[var(--text-muted)] shrink-0" />
                 <span className="truncate flex-1">{s.title}</span>
-                <span className="text-[10px] text-zinc-500">{s.created_at}</span>
+                <span className="text-[10px] text-[var(--text-muted)]">{s.created_at}</span>
               </button>
             ))}
           </div>
         </div>
 
         {/* PAYG Credits & User Profile Footer */}
-        <div className="p-3 border-t border-white/10 bg-[#0F1623]/80 space-y-2">
+        <div className="p-3 border-t border-[var(--border-subtle)] bg-[var(--bg-soft)]/60 space-y-2">
           {/* Credit balance badge */}
-          <div className="flex items-center justify-between p-2 rounded-xl bg-white/5 border border-white/5 text-xs">
-            <div className="flex items-center gap-2 text-zinc-300">
-              <Coins className="w-4 h-4 text-amber-400" />
+          <div className="flex items-center justify-between p-2 rounded-xl bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-xs">
+            <div className="flex items-center gap-2 text-[var(--text-secondary)]">
+              <Coins className="w-4 h-4 text-[var(--accent-premium)]" />
               <span className="font-mono">Baki PAYG</span>
             </div>
-            <span className="font-mono font-bold text-emerald-400">RM {credits}</span>
+            <Badge variant="success" size="sm">
+              RM {credits}
+            </Badge>
           </div>
 
           {/* User Account */}
           {user ? (
             <div className="flex items-center justify-between p-1.5">
               <div className="flex items-center gap-2 min-w-0">
-                <div className="w-7 h-7 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 flex items-center justify-center font-bold text-xs text-white uppercase shrink-0">
-                  {user.email ? user.email[0] : 'U'}
-                </div>
+                <Avatar fallback={user.email ? user.email[0] : 'U'} size="sm" status="online" />
                 <div className="min-w-0">
-                  <p className="text-xs font-medium text-zinc-200 truncate">
+                  <p className="text-xs font-medium text-[var(--text-primary)] truncate">
                     {user.user_metadata?.full_name || user.email?.split('@')[0]}
                   </p>
-                  <p className="text-[10px] text-zinc-500 truncate">{user.email}</p>
+                  <p className="text-[10px] text-[var(--text-muted)] truncate">{user.email}</p>
                 </div>
               </div>
               <button
+                type="button"
                 onClick={handleLogout}
                 title="Log Keluar"
-                className="p-1.5 rounded-lg text-zinc-400 hover:text-red-400 hover:bg-red-500/10 transition-colors"
+                aria-label="Log Keluar"
+                className="p-1.5 rounded-lg text-[var(--text-muted)] hover:text-[var(--feedback-danger-text)] hover:bg-[var(--feedback-danger-bg)] transition-colors"
               >
                 <LogOut className="w-4 h-4" />
               </button>
             </div>
           ) : (
             <button
+              type="button"
               onClick={handleGoogleLogin}
-              className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs font-medium transition-colors border border-white/10"
+              className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-[var(--bg-elevated)] hover:bg-[var(--surface-hover)] text-[var(--text-primary)] text-xs font-medium transition-colors border border-[var(--border-subtle)] shadow-sm"
             >
-              <svg className="w-4 h-4" viewBox="0 0 24 24">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   fill="#4285F4"
                   d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -480,35 +495,45 @@ export default function CloudCockpit() {
       {/* ────────────────────────────────────────────────────────── */}
       {/* MAIN CHAT CONTENT AREA */}
       {/* ────────────────────────────────────────────────────────── */}
-      <main className="flex-1 flex flex-col h-full bg-[#0B0F19] relative">
+      <main
+        id="chat-main-content"
+        tabIndex={-1}
+        className="flex-1 flex flex-col h-full bg-[var(--bg-primary)] relative focus:outline-hidden"
+      >
         {/* Top Header Bar */}
-        <header className="h-14 border-b border-white/10 bg-[#0B0F19]/80 backdrop-blur-md px-4 flex items-center justify-between shrink-0">
+        <header className="h-14 border-b border-[var(--border-subtle)] bg-[var(--surface-glass)] backdrop-blur-md px-4 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
             <button
+              type="button"
               onClick={() => setMobileMenuOpen(true)}
-              className="md:hidden p-1.5 rounded-lg text-zinc-400 hover:text-white"
+              aria-label="Buka menu navigasi"
+              className="md:hidden p-1.5 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-primary)]"
             >
               <Menu className="w-5 h-5" />
             </button>
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
-              <h2 className="text-sm font-semibold text-zinc-200">
-                Persona: <span className="text-purple-400">{activeAgent}</span>
+              <span className="w-2 h-2 rounded-full bg-[var(--aura-success-500)] shadow-[0_0_8px_var(--aura-success-500)]" />
+              <h2 className="text-sm font-semibold text-[var(--text-primary)]">
+                Persona: <span className="text-[var(--accent-primary)]">{activeAgent}</span>
               </h2>
-              <span className="text-[11px] text-zinc-500 font-mono hidden sm:inline">
+              <span className="text-[11px] text-[var(--text-muted)] font-mono hidden sm:inline">
                 · {AGENTS.find((a) => a.id === activeAgent)?.role}
               </span>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-zinc-400 font-mono">
-              <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
+            <ThemeToggle />
+
+            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[11px] text-[var(--text-secondary)] font-mono">
+              <ShieldCheck className="w-3.5 h-3.5 text-[var(--aura-info-500)]" />
               <span>Multi-Tenant Sandbox Safe</span>
             </div>
 
             {user && (
-              <span className="text-xs text-zinc-400 font-mono hidden md:inline">{user.email}</span>
+              <span className="text-xs text-[var(--text-muted)] font-mono hidden md:inline">
+                {user.email}
+              </span>
             )}
           </div>
         </header>
@@ -517,11 +542,13 @@ export default function CloudCockpit() {
         <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6">
           {messages.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center max-w-lg mx-auto py-12">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-600/30 to-cyan-500/20 border border-purple-500/30 flex items-center justify-center mb-5 shadow-2xl shadow-purple-500/20">
-                <Bot className="w-8 h-8 text-purple-400" />
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[var(--aura-purple-600)]/30 to-[var(--aura-info-500)]/20 border border-[var(--border-accent)] flex items-center justify-center mb-5 shadow-2xl shadow-[var(--accent-primary-glow)]">
+                <Bot className="w-8 h-8 text-[var(--accent-primary)]" />
               </div>
-              <h3 className="text-xl font-bold text-zinc-100 mb-2">AuraOne Cloud (Beta v1)</h3>
-              <p className="text-sm text-zinc-400 mb-6 leading-relaxed">
+              <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">
+                AuraOne Cloud (Beta v1)
+              </h3>
+              <p className="text-sm text-[var(--text-secondary)] mb-6 leading-relaxed">
                 Antaramuka perbualan multi-ejen beridentiti Malaysia. Sila taip sebarang soalan atau
                 pilih cadangan tindakan pantas di bawah.
               </p>
@@ -529,51 +556,65 @@ export default function CloudCockpit() {
               {/* Suggestions */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full">
                 <button
+                  type="button"
                   onClick={() =>
                     handleSendMessage('Bantu saya analisa strategi pasaran saham hari ini.')
                   }
-                  className="p-3 rounded-xl bg-[#161D2E] hover:bg-[#1C2538] border border-white/5 text-left text-xs text-zinc-300 transition-all hover:border-purple-500/30"
+                  className="p-3 rounded-xl bg-[var(--bg-soft)] hover:bg-[var(--surface-hover)] border border-[var(--border-subtle)] text-left text-xs text-[var(--text-secondary)] transition-all hover:border-[var(--border-accent)]"
                 >
-                  📈 <span className="font-semibold text-white">Analisis Pasaran</span>
-                  <p className="text-[11px] text-zinc-500 mt-1">
+                  📈{' '}
+                  <span className="font-semibold text-[var(--text-primary)]">Analisis Pasaran</span>
+                  <p className="text-[11px] text-[var(--text-muted)] mt-1">
                     Semak sentimen Bursa & teknikal pasaran bersama Aura-Trade.
                   </p>
                 </button>
 
                 <button
+                  type="button"
                   onClick={() =>
                     handleSendMessage(
                       'Tuliskan copywriting Facebook untuk produk Daging Salai Sakluma.',
                     )
                   }
-                  className="p-3 rounded-xl bg-[#161D2E] hover:bg-[#1C2538] border border-white/5 text-left text-xs text-zinc-300 transition-all hover:border-purple-500/30"
+                  className="p-3 rounded-xl bg-[var(--bg-soft)] hover:bg-[var(--surface-hover)] border border-[var(--border-subtle)] text-left text-xs text-[var(--text-secondary)] transition-all hover:border-[var(--border-accent)]"
                 >
-                  ✍️ <span className="font-semibold text-white">Copywriting Sakluma</span>
-                  <p className="text-[11px] text-zinc-500 mt-1">
+                  ✍️{' '}
+                  <span className="font-semibold text-[var(--text-primary)]">
+                    Copywriting Sakluma
+                  </span>
+                  <p className="text-[11px] text-[var(--text-muted)] mt-1">
                     Jana draf iklan menarik gaya tempatan bersama Aura-Pen.
                   </p>
                 </button>
 
                 <button
+                  type="button"
                   onClick={() =>
                     handleSendMessage('Bagaimanakah sistem kredit PAYG AuraOne berfungsi?')
                   }
-                  className="p-3 rounded-xl bg-[#161D2E] hover:bg-[#1C2538] border border-white/5 text-left text-xs text-zinc-300 transition-all hover:border-purple-500/30"
+                  className="p-3 rounded-xl bg-[var(--bg-soft)] hover:bg-[var(--surface-hover)] border border-[var(--border-subtle)] text-left text-xs text-[var(--text-secondary)] transition-all hover:border-[var(--border-accent)]"
                 >
-                  💰 <span className="font-semibold text-white">Sistem Kredit PAYG</span>
-                  <p className="text-[11px] text-zinc-500 mt-1">
+                  💰{' '}
+                  <span className="font-semibold text-[var(--text-primary)]">
+                    Sistem Kredit PAYG
+                  </span>
+                  <p className="text-[11px] text-[var(--text-muted)] mt-1">
                     Ketahui cara pengiraan token & penolakan baki RM10.
                   </p>
                 </button>
 
                 <button
+                  type="button"
                   onClick={() =>
                     handleSendMessage('Boleh cadangkan idea kempen visual persona digital Maya?')
                   }
-                  className="p-3 rounded-xl bg-[#161D2E] hover:bg-[#1C2538] border border-white/5 text-left text-xs text-zinc-300 transition-all hover:border-purple-500/30"
+                  className="p-3 rounded-xl bg-[var(--bg-soft)] hover:bg-[var(--surface-hover)] border border-[var(--border-subtle)] text-left text-xs text-[var(--text-secondary)] transition-all hover:border-[var(--border-accent)]"
                 >
-                  🎨 <span className="font-semibold text-white">Konsep Visual FLUX</span>
-                  <p className="text-[11px] text-zinc-500 mt-1">
+                  🎨{' '}
+                  <span className="font-semibold text-[var(--text-primary)]">
+                    Konsep Visual FLUX
+                  </span>
+                  <p className="text-[11px] text-[var(--text-muted)] mt-1">
                     Rangka prompt kreatif untuk watak konsisten AI bersama Aura-Art.
                   </p>
                 </button>
@@ -591,14 +632,14 @@ export default function CloudCockpit() {
                 <div
                   className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 shadow-md ${
                     msg.role === 'user'
-                      ? 'bg-purple-600 text-white'
-                      : 'bg-[#161D2E] border border-purple-500/30 text-purple-400'
+                      ? 'bg-[var(--accent-primary)] text-white'
+                      : 'bg-[var(--bg-soft)] border border-[var(--border-accent)] text-[var(--accent-primary)]'
                   }`}
                 >
                   {msg.role === 'user' ? (
                     <span className="text-xs font-bold">👤</span>
                   ) : (
-                    <Zap className="w-4 h-4 text-purple-400" />
+                    <Zap className="w-4 h-4 text-[var(--accent-primary)]" />
                   )}
                 </div>
 
@@ -606,20 +647,22 @@ export default function CloudCockpit() {
                 <div
                   className={`rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                     msg.role === 'user'
-                      ? 'bg-purple-600 text-white rounded-tr-none'
-                      : 'bg-[#161D2E] border border-white/10 text-zinc-200 rounded-tl-none shadow-sm'
+                      ? 'bg-[var(--accent-primary)] text-white rounded-tr-none'
+                      : 'bg-[var(--bg-soft)] border border-[var(--border-subtle)] text-[var(--text-primary)] rounded-tl-none shadow-sm'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-4 mb-1">
-                    <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-zinc-400">
+                    <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-[var(--text-muted)]">
                       {msg.role === 'user' ? 'Anda' : `${activeAgent} · AuraOne`}
                     </span>
-                    <span className="text-[10px] text-zinc-500 font-mono">{msg.timestamp}</span>
+                    <span className="text-[10px] text-[var(--text-muted)] font-mono">
+                      {msg.timestamp}
+                    </span>
                   </div>
                   <div className="whitespace-pre-wrap font-sans">
                     {msg.content || (
-                      <span className="inline-flex items-center gap-1.5 text-zinc-400 text-xs italic">
-                        <span className="w-2 h-2 rounded-full bg-purple-400 animate-ping" />
+                      <span className="inline-flex items-center gap-1.5 text-[var(--text-secondary)] text-xs italic">
+                        <span className="w-2 h-2 rounded-full bg-[var(--accent-primary)] animate-ping" />
                         Aura sedang menaip respons...
                       </span>
                     )}
@@ -632,9 +675,9 @@ export default function CloudCockpit() {
         </div>
 
         {/* Chat Input Box */}
-        <footer className="p-4 border-t border-white/10 bg-[#0B0F19]/90 backdrop-blur-md">
+        <footer className="p-4 border-t border-[var(--border-subtle)] bg-[var(--surface-glass)] backdrop-blur-md">
           <div className="max-w-3xl mx-auto">
-            <div className="flex items-end gap-2 bg-[#111827] border border-white/15 focus-within:border-purple-500/50 rounded-2xl p-2 transition-colors shadow-lg">
+            <div className="flex items-end gap-2 bg-[var(--bg-elevated)] border border-[var(--border-strong)] focus-within:border-[var(--accent-primary)] rounded-2xl p-2 transition-colors shadow-lg">
               <textarea
                 ref={textareaRef}
                 value={input}
@@ -643,17 +686,20 @@ export default function CloudCockpit() {
                 placeholder={`Tanya ${activeAgent} sebarang arahan atau tugasan... (Enter untuk hantar)`}
                 rows={1}
                 disabled={isStreaming}
-                className="flex-1 bg-transparent text-sm text-zinc-100 placeholder-zinc-500 px-3 py-2 outline-none resize-none max-h-36 leading-relaxed"
+                aria-label={`Mesej kepada ${activeAgent}`}
+                className="flex-1 bg-transparent text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] px-3 py-2 outline-hidden resize-none max-h-36 leading-relaxed"
               />
               <button
+                type="button"
                 onClick={() => handleSendMessage()}
                 disabled={!input.trim() || isStreaming}
-                className="w-10 h-10 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed text-white flex items-center justify-center shrink-0 transition-all active:scale-95 shadow-md shadow-purple-500/25"
+                aria-label="Hantar mesej"
+                className="w-10 h-10 rounded-xl bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] disabled:opacity-30 disabled:cursor-not-allowed text-white flex items-center justify-center shrink-0 transition-all active:scale-95 shadow-md shadow-[var(--accent-primary-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-primary)]"
               >
                 <Send className="w-4 h-4" />
               </button>
             </div>
-            <div className="flex items-center justify-between text-[11px] text-zinc-500 mt-2 px-1">
+            <div className="flex items-center justify-between text-[11px] text-[var(--text-muted)] mt-2 px-1">
               <span>Shift + Enter untuk baris baru</span>
               <span className="font-mono">AuraOne Cloud Beta · Multi-Tenant Vercel</span>
             </div>

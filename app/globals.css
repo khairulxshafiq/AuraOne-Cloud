@@ -1,40 +1,43 @@
 @import 'tailwindcss';
 
-:root {
-  --bg-base: #0b0f19;
-  --bg-surface: #111827;
-  --bg-card: #161d2e;
-  --bg-card-hover: #1c2538;
-  --bg-input: #0f1623;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-accent: rgba(139, 92, 246, 0.35);
-  --accent: #8b5cf6;
-  --accent-glow: rgba(139, 92, 246, 0.25);
-  --accent-2: #06b6d4;
-  --green: #22d3a5;
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-}
+/* AuraOne Design System Tokens */
+@import '../styles/tokens/primitives.css';
+@import '../styles/tokens/typography.css';
+@import '../styles/tokens/spacing.css';
+@import '../styles/tokens/motion.css';
+@import '../styles/tokens/themes.css';
 
 body {
-  background-color: var(--bg-base);
+  background-color: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
+  font-family: var(--aura-font-sans);
+  transition:
+    background-color var(--aura-duration-fast) var(--aura-ease-out),
+    color var(--aura-duration-fast) var(--aura-ease-out);
+}
+
+/* Accessible focus visible utility */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
 }
 
 /* Custom scrollbars */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 4px;
+  background: var(--border-strong);
+  border-radius: var(--aura-radius-full);
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--accent-primary);
 }

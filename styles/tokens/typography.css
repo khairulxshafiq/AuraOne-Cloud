@@ -1,0 +1,66 @@
+/**
+ * AuraOne Design System — Typography Tokens
+ * Clean, readable typography optimized for Bahasa Melayu chat and dashboards.
+ */
+
+:root {
+  /* Font Families */
+  --aura-font-sans: var(
+    --font-inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif
+  );
+  --aura-font-display: var(
+    --font-inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif
+  );
+  --aura-font-mono: var(
+    --font-jetbrains-mono,
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    'Liberation Mono',
+    'Courier New',
+    monospace
+  );
+
+  /* Font Sizes */
+  --aura-text-xs: 0.75rem; /* 12px - Badges, fine print */
+  --aura-text-sm: 0.875rem; /* 14px - Subtitles, secondary text, metadata */
+  --aura-text-base: 1rem; /* 16px - Body text, chat bubbles, inputs */
+  --aura-text-lg: 1.125rem; /* 18px - Card titles, prominent subheadings */
+  --aura-text-xl: 1.25rem; /* 20px - Section headings */
+  --aura-text-2xl: 1.5rem; /* 24px - Modal headers, dashboard titles */
+  --aura-text-3xl: 1.875rem; /* 30px - Major feature titles */
+  --aura-text-4xl: 2.25rem; /* 36px - Display hero titles */
+
+  /* Line Heights */
+  --aura-leading-tight: 1.25;
+  --aura-leading-snug: 1.375;
+  --aura-leading-normal: 1.5;
+  --aura-leading-relaxed: 1.625;
+
+  /* Font Weights */
+  --aura-font-normal: 400;
+  --aura-font-medium: 500;
+  --aura-font-semibold: 600;
+  --aura-font-bold: 700;
+
+  /* Letter Spacing */
+  --aura-tracking-tight: -0.015em;
+  --aura-tracking-normal: 0em;
+  --aura-tracking-wide: 0.025em;
+}
